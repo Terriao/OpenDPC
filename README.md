@@ -30,7 +30,7 @@ OpenDPC is one Unity-based project that addresses both gaps at once:
 
 ## Contents
 
-1. [At a glance](#at-a-glance)
+1. [Overview](#overview)
 2. [System architecture](#system-architecture)
 3. [Getting started](#getting-started)
 4. [The player in detail](#the-player-in-detail)
@@ -48,7 +48,7 @@ OpenDPC is one Unity-based project that addresses both gaps at once:
 
 ---
 
-## At a glance
+## Overview
 
 | | Component | One-line description |
 |---|---|---|
