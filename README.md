@@ -1,11 +1,10 @@
 <div align="center">
 
-<img src="opendpc.png" alt="OpenDPC" width="780"/>
+<img src="opendpc.PNG" alt="OpenDPC" width="780"/>
 
 **An open-source dynamic point cloud player and a paired-comparison platform for just-noticeable-distortion annotation**
 
 [![Engine](https://img.shields.io/badge/built%20on-Unity-000000?logo=unity&logoColor=white)](#)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Paper](https://img.shields.io/badge/ACM%20MM-2026%20(under%20review)-orange)](#citation)
 [![Demo](https://img.shields.io/badge/demo-online-success)](https://docs.google.com/presentation/d/1kI2ak1zXNcYN4-CCj-AFejLzboaM6lWH/edit?usp=sharing)
