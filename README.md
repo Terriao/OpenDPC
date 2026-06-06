@@ -178,7 +178,7 @@ Trimming **a third** rather than a half at each step costs a small number of ext
 
 The repository ships a curated library of eighteen dynamic models sourced from Sketchfab, covering objects, characters, and animals (see thumbnails below). For each model, the first 64 frames are encoded by **V-PCC** at twenty rate points spanning nine quality tiers — from lossless down to very-low-quality. Five of the twenty rate points align with the **MPEG V-PCC Common Test Conditions** (CTC R1 through R5), so OpenDPC results are directly comparable to standardisation reports.
 
-<p align="center"><img src="thumbnails.png" alt="18 test sequences" width="640"/></p>
+<p align="center"><img src="samples.png" alt="18 test sequences" width="640"/></p>
 
 ### V-PCC rate-point configuration
 
