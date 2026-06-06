@@ -357,13 +357,13 @@ We thank the sixty subjects who participated in the JND study, and **Peng Cheng 
 
 | Role | Name | Affiliation |
 |------|------|-------------|
-| Coordinator | Asst. Prof. Wei Gao | School of Electronic and Computer Engineering, Peking University · Peng Cheng Laboratory |
+| Coordinator | Asso. Prof. Wei Gao | School of Electronic and Computer Engineering, Peking University · Peng Cheng Laboratory |
 | Lead developer | Wenxu Gao | School of Electronic and Computer Engineering, Peking University · Peng Cheng Laboratory |
-| Contributor | Songlin Fan | Institute of Trustworthy Embodied AI, Fudan University · China Mobile Shanghai ICT |
+| Contributor | Songlin Fan | Institute of Trustworthy Embodied AI, Fudan University · ChinaMobileShanghaiICTCo.,Ltd. |
 
 For questions, collaboration, OpenI mirror access, or push privileges, please contact:
 
-**Asst. Prof. Wei Gao** — `gaowei262@pku.edu.cn`
+**Asso. Prof. Wei Gao** — `gaowei262@pku.edu.cn`
 
 Bug reports and feature requests are tracked via [GitHub Issues](https://github.com/Terriao/OpenDPC/issues).
 
