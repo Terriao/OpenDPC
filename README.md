@@ -2,7 +2,7 @@
 
 <img src="logo.PNG" alt="OpenDPC" width="700"/>
 
-**An open-source dynamic point cloud player and paired-comparison platform for just noticeable distortion annotation**
+**An open-source Unity-based dynamic point cloud player and paired-comparison platform for just-noticeable-distortion annotation**
 
 [![Engine](https://img.shields.io/badge/built%20on-Unity-000000?logo=unity&logoColor=white)](#)
 [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows&logoColor=white)](#)
@@ -14,16 +14,17 @@
 
 </div>
 
-> **Resources at a glance:**  
-> 📦 **Prebuilt software** → <https://github.com/Terriao/OpenDPC/blob/main/Software>  
-> 🎚 **Distortion ladder configs** → <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>  
+> **Resources at a glance:**
+> 📦 **Prebuilt software** → [`Software/software_v2.0.rar`](https://github.com/Terriao/OpenDPC/blob/main/Software/software_v2.0.rar) · folder: <https://github.com/Terriao/OpenDPC/tree/main/Software>
+> 🧩 **Preprocessing tool** → [`preprocess_tool/PontZen_v3.exe`](https://github.com/Terriao/OpenDPC/blob/main/preprocess_tool/PontZen_v3.exe) · folder: <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>
+> 🎚 **V-PCC distortion ladder configs (20 rate points)** → [`ctc_configs/ctc-r01.cfg`](https://github.com/Terriao/OpenDPC/blob/main/ctc_configs/ctc-r01.cfg) … [`ctc-r20.cfg`](https://github.com/Terriao/OpenDPC/blob/main/ctc_configs/ctc-r20.cfg) · folder: <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>
 > 🧪 **Test sequences** → <https://github.com/Terriao/OpenDPC/tree/main/test_data>
 
 ---
 
 ## Why this project exists
 
-A dynamic point cloud is a *sequence* of point clouds, and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR (cwipc, VR2Gather), capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
+A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR, capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
 
 OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
@@ -37,7 +38,7 @@ OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
 ## Position relative to prior work
 
-Dynamic point cloud rendering itself has been addressed in several systems. Hofer et al. (IC3D 2018) built an end-to-end pipeline focused on capture-to-display latency for studio environments. Mei et al. (ICAICA 2023) released a web-based viewer optimised for industrial inspection of static and quasi-static parts. The open-source **cwipc** library (used by VR2Gather, ACM MM 2024) provides a comprehensive C++/Unity stack for capturing, compressing, transmitting, and rendering point clouds in social-VR tele-presence applications; cwipc's Unity package can also render pre-recorded `.ply` streams as a side-feature of its capture pipeline.
+Dynamic point cloud rendering itself has been addressed in several systems. Hofer et al. (IC3D 2018) built an end-to-end pipeline focused on capture-to-display latency for studio environments. Mei et al. (ICAICA 2023) released a web-based viewer optimised for industrial inspection of static and quasi-static parts. The open-source **cwipc** library (used by VR2Gather, ACM MM 2024) provides a C++/Unity stack for capturing, compressing, transmitting, and rendering point clouds in social-VR tele-presence applications; its Unity package can also render pre-recorded sequences as a side feature of the capture pipeline.
 
 OpenDPC sits in a different design point. Rather than optimising for live capture-to-display latency or tele-presence orchestration, it targets the **offline, reproducible subjective-evaluation workflow**: a researcher loads a reference sequence and a fixed distortion ladder, runs a structured paired-comparison protocol, and exports a JND result that another lab can independently reproduce. The components OpenDPC contributes that the systems above do not bundle are: a paired-comparison JND harness with a ternary-refinement controller, an integrated published V-PCC distortion ladder, and the accompanying 60-subject subjective dataset.
 
@@ -50,6 +51,10 @@ OpenDPC sits in a different design point. Rather than optimising for live captur
 
 The contribution we claim is the **integrated JND annotation workflow with the released ladder and dataset**, not a novel rendering algorithm.
 
+### Relation to OpenVPC
+
+OpenDPC and our concurrent **OpenVPC** project are sister codebases with distinct scope. OpenVPC is a broad collection of objective and subjective tools for **static** point clouds. OpenDPC is purpose-built for **dynamic sequences** and contributes three artefacts that OpenVPC does not: (i) a Unity real-time player for point cloud sequences, (ii) a paired-comparison JND harness adapted to the *temporal* nature of dynamic content — with the dwell-time clock, camera-locked synchronisation, and frame-rate control that are meaningless for static models — and (iii) a published 60-subject JND dataset over the V-PCC 20-rate ladder for 18 dynamic sequences. The JND interface concept overlaps; the experimental protocol, the released dataset, and the player do not.
+
 ---
 
 ## Contents
@@ -58,18 +63,19 @@ The contribution we claim is the **integrated JND annotation workflow with the r
 2. [System architecture](#system-architecture)
 3. [Repository layout](#repository-layout)
 4. [Getting started](#getting-started)
-5. [The player in detail](#the-player-in-detail)
-6. [The JND sub-platform in detail](#the-jnd-sub-platform-in-detail)
-7. [Test sequences and V-PCC quality tiers](#test-sequences-and-v-pcc-quality-tiers)
-8. [Subjective experiment and results](#subjective-experiment-and-results)
-9. [Use cases](#use-cases)
-10. [Roadmap](#roadmap)
-11. [FAQ](#faq)
-12. [Citation](#citation)
-13. [Community](#community)
-14. [License](#license)
-15. [Acknowledgements](#acknowledgements)
-16. [Contributors and contact](#contributors-and-contact)
+5. [The preprocessing tool — PontZen](#the-preprocessing-tool--pontzen)
+6. [The player in detail](#the-player-in-detail)
+7. [The JND sub-platform in detail](#the-jnd-sub-platform-in-detail)
+8. [Test sequences and V-PCC quality tiers](#test-sequences-and-v-pcc-quality-tiers)
+9. [Subjective experiment and results](#subjective-experiment-and-results)
+10. [Use cases](#use-cases)
+11. [Roadmap](#roadmap)
+12. [FAQ](#faq)
+13. [Citation](#citation)
+14. [Community](#community)
+15. [License](#license)
+16. [Acknowledgements](#acknowledgements)
+17. [Contributors and contact](#contributors-and-contact)
 
 ---
 
@@ -77,11 +83,11 @@ The contribution we claim is the **integrated JND annotation workflow with the r
 
 | | Component | One-line description |
 |---|---|---|
-| 1 | **Dynamic point cloud processor** | A pre-rendering step that normalises geometry and bit-packs RGB-plus-luminance into a single 32-bit integer per point, ready for the GPU. |
-| 2 | **Dynamic point cloud player** | Real-time looping playback of `.ply` sequences with pause / resume, frame counter, configurable FPS, free rotation, and free zoom. |
+| 1 | **Dynamic point cloud processor (PontZen)** | A standalone preprocessing tool that normalises geometry and bit-packs RGB-plus-luminance into a single 32-bit integer per point, ready for the GPU. |
+| 2 | **Dynamic point cloud player** | Real-time looping playback of point cloud sequences with pause / resume, frame counter, configurable FPS, free rotation, and free zoom. |
 | 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a Dichotomizing-or-Linear search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
 
-All three components live inside a single Unity application; the user picks **Player Mode** or **JND Mode** from a Home Panel at launch, and the same preprocessing path serves both.
+The player and JND sub-platform live inside a single Unity application; the user picks **Player Mode** or **JND Mode** from a Home Panel at launch. PontZen runs separately, ahead of either mode.
 
 ---
 
@@ -91,18 +97,16 @@ All three components live inside a single Unity application; the user picks **Pl
 <table><tr><td>
 <pre>
 ┌──────────────────────────────────────────────────────────────────────┐
-│                        Dynamic point cloud assets                    │
-│            (per-frame .ply files; one folder per sequence)           │
+│             Raw dynamic point cloud sequences (per-frame)            │
 └─────────────────────────────────┬────────────────────────────────────┘
                                   │
                   ┌───────────────▼───────────────┐
-                  │   ❶ Dynamic point cloud       │
-                  │      processor                │
+                  │   ❶ PontZen preprocessor      │
                   │  · centring + unit-sphere     │
                   │    scaling                    │
                   │  · 32-bit RGB+luminance pack  │
                   └───────────────┬───────────────┘
-                                  │  GPU buffers
+                                  │  GPU-ready frames
                   ┌───────────────▼───────────────┐
                   │        Home Panel             │
                   │     (mode selection)          │
@@ -132,6 +136,8 @@ All three components live inside a single Unity application; the user picks **Pl
 OpenDPC/
 ├── Software/                # prebuilt Windows binary
 │   └── software_v2.0.rar    # archive containing JNDModelStreamViewer.exe + Unity Data
+├── preprocess_tool/         # standalone preprocessing executable
+│   └── PontZen_v3.exe       # centring, unit-sphere scaling, 32-bit attribute packing
 ├── ctc_configs/             # V-PCC rate-point configurations (the 20-point distortion ladder)
 │   ├── ctc-r01.cfg          # rate point r1   (Lossless)
 │   ├── ctc-r02.cfg          # rate point r2   (Near-lossless)
@@ -143,7 +149,7 @@ OpenDPC/
 │   ├── ctc-r19.cfg          # rate point r19  (CTC R5)
 │   │   …
 │   └── ctc-r20.cfg          # rate point r20  (Very-low quality)
-├── test_data/               # 18 test sequences in .ply form, ready for either Mode
+├── test_data/               # 18 test sequences, ready for either Mode
 ├── logo.PNG                 # the project logo (used at the top of this README)
 ├── player.png               # player screenshot
 ├── jndviewer.png            # JND settings panel screenshot
@@ -153,6 +159,7 @@ OpenDPC/
 ```
 
 - **Prebuilt software**: <https://github.com/Terriao/OpenDPC/tree/main/Software>
+- **PontZen preprocessing tool**: <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>
 - **V-PCC distortion-ladder configs (20 rate points)**: <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>
 - **Test sequences**: <https://github.com/Terriao/OpenDPC/tree/main/test_data>
 
@@ -162,7 +169,7 @@ OpenDPC/
 
 ### Prerequisites
 
-A 64-bit **Windows** machine with a discrete GPU (≥ 4 GB VRAM recommended for sequences denser than 10⁶ points per frame). The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
+A 64-bit **Windows** machine with a discrete GPU. For the JND module specifically, available VRAM must be large enough to hold **both** sequences (reference and one candidate distortion) at once — the harness loads them simultaneously to keep paired-comparison latency below the rendering interval. A starting point: ≥ 4 GB VRAM for sequences denser than 10⁶ points per frame; more for higher-density content. The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
 
 ### Install and run
 
@@ -170,17 +177,20 @@ A 64-bit **Windows** machine with a discrete GPU (≥ 4 GB VRAM recommended for 
 2. Extract the archive with WinRAR / 7-Zip to any local folder.
 3. Double-click **`JNDModelStreamViewer.exe`** to launch.
 
+### Preprocess a sequence with PontZen
+
+The player expects sequences in a GPU-ready packed format produced by **PontZen** (see [next section](#the-preprocessing-tool--pontzen) for the details). Workflow:
+
+1. Download [`preprocess_tool/PontZen_v3.exe`](https://github.com/Terriao/OpenDPC/blob/main/preprocess_tool/PontZen_v3.exe).
+2. Place your raw per-frame point cloud files of one sequence in a single source folder (lexicographically ordered: `0001.ply`, `0002.ply`, …).
+3. Run `PontZen_v3.exe`, point it at the source folder, and pick an output folder. PontZen processes each frame in turn.
+4. Point the player (or the JND module's reference / distortion-ladder fields) at the *output* folder.
+
+For the test data we already ship in [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data), the PontZen step has already been done — those sequences can be loaded into the player directly.
+
 ### Try it on the bundled test data
 
-The repository's [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data) folder ships the 18 reference sequences used in our subjective experiments, and the 20-point V-PCC distortion ladder generated from them (see also [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs) for the encoder configurations that produced the ladder). Point the application at `test_data/<sequence>/reference/` for Player Mode, or at `test_data/<sequence>/` (which contains both `reference/` and the per-rate-point subfolders) for JND Mode, and the harness will pick the structure up automatically.
-
-### Prepare your own sequence
-
-For a new sequence of your own:
-
-1. Convert your dynamic 3D source to per-frame `.ply` files in a single folder, ordered lexicographically (`0001.ply`, `0002.ply`, …). Our `.glb → .obj → .ply` pipeline using **Blender** and **CloudCompare's Poisson-disk sampler** is described in [Asset preparation](#asset-preparation-pipeline) below.
-2. To encode a V-PCC distortion ladder, drive the V-PCC reference encoder with the 20 configuration files in [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs). The five CTC-aligned files (`ctc-r07.cfg`, `ctc-r10.cfg`, `ctc-r13.cfg`, `ctc-r16.cfg`, `ctc-r19.cfg`) correspond to CTC R1–R5; the remaining fifteen fill in intermediate quality levels for finer JND localisation.
-3. Lay the encoded outputs out as one subfolder per rate point, each subfolder holding the same set of frame indices as the reference.
+The repository's [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data) folder ships the 18 reference sequences used in our subjective experiments. For Player Mode, point at any `test_data/<sequence>/reference/` folder. For JND Mode, point at `test_data/<sequence>/` (which contains both the reference and the per-rate-point subfolders). The 20 V-PCC encoder configurations that generated the distortion ladder live in [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs).
 
 ### Choose a mode
 
@@ -191,13 +201,35 @@ At launch the **Home Panel** presents two entry points:
 
 ---
 
+## The preprocessing tool — PontZen
+
+**PontZen** is a small Windows command-line / drag-and-drop executable that prepares raw point cloud sequences for GPU-resident playback. It does two things per frame, and only two things:
+
+1. **Geometric normalisation.** Each frame's centroid is translated to the coordinate origin, then the frame is isotropically rescaled until it fits inside the unit sphere of radius 1. This removes the dependence of downstream viewing parameters (camera distance, model scale) on the absolute capture units, so a sequence shot in millimetres and one shot in metres render at the same apparent size.
+
+2. **Attribute bit-packing.** Each point's four attribute channels — Red, Green, Blue, and a derived luminance — are encoded into a single 32-bit unsigned integer:
+
+   | Bits | 0 – 7 | 8 – 15 | 16 – 23 | 24 – 31 |
+   |---|---|---|---|---|
+   | Channel | R | G | B | Luminance |
+
+   Packing four 8-bit channels into one 32-bit integer halves the per-point bandwidth on upload and, more importantly, allows the entire preprocessed sequence to be loaded into VRAM in one pass and indexed per frame at playback time without further copies. The arithmetic cost (one shift-and-mask per channel per shader invocation) is negligible.
+
+The packed output is what the player ingests. Without preprocessing, raw frames work for the very smallest sequences but break the GPU-streaming guarantees on anything realistic.
+
+### Why a separate tool?
+
+We split PontZen out of the player on purpose. The preprocessing step is single-pass, deterministic, and dataset-wide; bundling it inside the player would force a re-pack every time the user opens a sequence. Keeping it standalone lets a sequence be preprocessed once, then reused across many sessions, many studies, and (eventually) cross-platform builds of the player without re-running the conversion.
+
+---
+
 ## The player in detail
 
 <p align="center"><img src="player.png" alt="OpenDPC dynamic point cloud player" width="640"/></p>
 
 The player is built around three design constraints we found missing in existing tools:
 
-1. **Streaming-friendly memory.** Each `.ply` frame is pre-processed into a tightly-packed GPU buffer where the four-channel colour (R, G, B, luminance) is encoded as one 32-bit unsigned integer per point — bits 0–7 for R, 8–15 for G, 16–23 for B, 24–31 for luminance. The full sequence is uploaded to VRAM once and indexed per frame at playback time. The arithmetic is cheap; the memory bandwidth saved is real.
+1. **Streaming-friendly memory.** The packed format produced by PontZen lets the full sequence sit in VRAM and be indexed per frame at playback time. The arithmetic on the GPU side is cheap; the memory bandwidth saved is real.
 
 2. **Camera-anchored model.** Each frame is rendered onto a single empty model placed at the camera origin, which means rotation and zoom interact intuitively with the model rather than with the world. Pause does not freeze the camera — you can keep inspecting the geometry from any angle while a frame holds.
 
@@ -215,7 +247,7 @@ Interactive controls during playback:
 </table>
 </div>
 
-> **Format support.** The current release accepts `.ply` only (the common output of V-PCC, G-PCC, and most acquisition pipelines). Importers for `.pcd`, `.las`, `.e57`, and on-the-fly `.obj → .ply` conversion are on the [roadmap](#roadmap); contributions welcome.
+> **Format support.** The current release accepts the standard point cloud frame format on input to PontZen (`.ply`); broader importers (`.pcd`, `.las`, `.e57`, and on-the-fly `.obj` conversion) are on the [roadmap](#roadmap), and contributions are welcome.
 
 ---
 
@@ -232,7 +264,7 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 | **Viewing seconds** | 6 s | Minimum time the subject must observe each comparison before the verdict buttons unlock. Prevents reflex clicks and gives temporal masking time to settle. |
 | **FPS** | 15 fps | Playback rate during evaluation. Lower than typical real-time playback to keep per-frame attention high. |
 | **Model scale** | 3× | Apparent size of the model. Held constant so that retinal projection is comparable across subjects and sessions. |
-| **Reference folder** | — | The pristine sequence. |
+| **Reference folder** | — | The pristine (PontZen-preprocessed) reference sequence. |
 | **Distortion ladder folder** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
 | **Search Mode** | Dichotomizing | Selects the controller that walks the rate points (see [below](#search-mode)). |
 
@@ -268,7 +300,7 @@ Loop until |r_hi - r_lo| ≤ 1:
 Output: r_lo of the final interval  =  this subject's JND rate point for this sequence
 ```
 
-Trimming **a third** rather than a half at each step costs a small number of extra comparisons relative to plain bisection — but the surplus dampens the noise that comes from low-confidence verdicts near the threshold, and the rate point the controller settles on lands closer to the true JND across our subject pool. A more aggressive halving converges faster but is brittle when the subject is uncertain on the very comparison that drives the next decision.
+Trimming **a third** rather than a half at each step costs a small number of extra comparisons relative to plain bisection — but the surplus dampens the noise that comes from low-confidence verdicts near the threshold, and the rate point the controller settles on lands closer to the true JND across our subject pool.
 
 Internally, the controller maintains a binary-tree representation of the visited rate-point intervals (`PointCloudBinaryTreeNodes`), so the full traversal of any session can be replayed post-hoc from the log file.
 
@@ -320,15 +352,15 @@ Total compressed asset size: 18 sequences × 20 rate points × 64 frames = **23,
 
 ### Asset preparation pipeline
 
-Source `.glb` models from Sketchfab were converted to colour-bearing `.ply` sequences in two stages:
+Source `.glb` models from Sketchfab were converted to colour-bearing point cloud sequences in two stages:
 
 ```
-.glb (Sketchfab)  ──Blender──►  .obj + textures  ──CloudCompare batch──►  .ply sequence
+.glb (Sketchfab)  ──Blender──►  .obj + textures  ──CloudCompare batch──►  point cloud sequence
 ```
 
-**Sampling method.** The `.obj → .ply` conversion uses **CloudCompare's Poisson-disk sampling** to produce a roughly uniform point density across the surface (cf. uniform random sampling, which under-samples low-curvature regions). For very fine geometry (sequences F, M) we additionally cap the per-frame point count at 100 K to keep playback responsive on mid-range GPUs. The choice of sampler does affect downstream JND thresholds — uniform random sampling typically yields a noisier surface and slightly lower (more sensitive) JND values; Poisson-disk gives the most stable thresholds in our pilot study, which is why we adopted it. The script is parameterised, so switching sampler is a one-flag change.
+**Sampling method.** The `.obj → point cloud` conversion uses **CloudCompare's Poisson-disk sampling** to produce a roughly uniform point density across the surface (cf. uniform random sampling, which under-samples low-curvature regions). For very fine geometry (sequences F, M) we additionally cap the per-frame point count at 100 K to keep playback responsive on mid-range GPUs. The choice of sampler does affect downstream JND thresholds — uniform random sampling typically yields a noisier surface and slightly lower (more sensitive) JND values; Poisson-disk gives the most stable thresholds in our pilot study. The script is parameterised, so switching sampler is a one-flag change.
 
-The whole pipeline is batch-scriptable rather than interactive, so adding new sequences to the test library is a single command.
+The output of this pipeline is then passed through PontZen before being loaded into the player.
 
 ---
 
@@ -397,7 +429,8 @@ The repository is permissively licensed for both research and commercial extensi
 ## Roadmap
 
 - **Cross-platform builds** — the current public release is Windows-only (uses native Win32 file dialogs and folder pickers via `Win32API`/`VistaFileDialog`). The Unity codebase is portable; macOS and Linux build profiles are on the immediate roadmap, blocked only on substituting `Standalone File Browser` for the native Windows shell calls.
-- **Broader format support** — importers for `.pcd`, `.las`, `.e57`, and on-the-fly `.obj → .ply` conversion, removing the current `.ply`-only restriction.
+- **PontZen cross-platform** — porting the preprocessor to macOS / Linux follows the player port; the core normalisation + bit-packing logic is itself portable.
+- **Broader format support** — importers for `.pcd`, `.las`, `.e57`, and on-the-fly `.obj` conversion, removing the current input-format restriction in the PontZen stage.
 - **Temporal-artefact JND track** — paired-comparison variants that hold spatial quality constant and vary *temporal* distortions (flicker, V-PCC patch popping, seam discontinuities), so that motion-specific perceptual thresholds can be measured alongside the spatial-distortion thresholds reported here.
 - **GPU-streamed long sequences** — current VRAM-resident pipeline caps sequences at the GPU's free memory; a sliding-window streamer is in development.
 - **Automated JND batch mode** — head-mounted display integration and automated session orchestration to scale subjective studies.
@@ -411,6 +444,9 @@ The repository is permissively licensed for both research and commercial extensi
 **How does OpenDPC differ from cwipc / VR2Gather, Hofer 2018, or web-based viewers?**
 Those systems are optimised for *live capture-to-display* (Hofer 2018), *social-VR tele-presence* (cwipc / VR2Gather), or *web-based viewing* of mostly static or quasi-static parts (Mei 2023). OpenDPC is optimised for the **offline, reproducible subjective-evaluation workflow** — loading a reference and a fixed distortion ladder, running a structured paired-comparison protocol, and exporting JND results that another lab can independently reproduce. The unique pieces are the integrated JND harness, the released V-PCC distortion ladder, and the 60-subject dataset.
 
+**Why a separate PontZen tool rather than preprocessing inside the player?**
+The preprocessing step is single-pass, deterministic, and dataset-wide. Bundling it into the player would force a re-pack every time the user opens a sequence; keeping it standalone lets the same packed output be reused across many sessions and studies. Splitting it out also keeps the future cross-platform port simpler — the renderer and the preprocessor can be ported independently.
+
 **Why Unity and not a custom OpenGL renderer?**
 Unity gave us a working cross-platform shader pipeline on day one, an interaction layer (drag, zoom, UI panels) that did not need to be hand-rolled, and a build system that targets Windows, macOS, and Linux from the same source tree. The cost is a heavier runtime; the saving is months of engineering. For a research-grade tool, the trade lands in Unity's favour.
 
@@ -418,9 +454,12 @@ Unity gave us a working cross-platform shader pipeline on day one, an interactio
 About 12–15 minutes for the nine sequences in one group, under the default Dichotomizing search mode. Each sequence converges in 4–5 paired comparisons, plus the mandatory 6 s dwell time per comparison. Linear mode roughly quadruples the duration.
 
 **Can I plug in my own distortion ladder?**
-Yes. The JND harness only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the harness.
+Yes. The JND harness only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the harness — preprocess them through PontZen and they load like any other sequence.
 
-**What sampling method was used to make the `.ply` sequences in `test_data/`?**
+**Why does the JND module need so much VRAM?**
+The paired-comparison view holds both the reference and the candidate distorted sequence in VRAM simultaneously, so playback never stalls on disk I/O. As a rule of thumb, free VRAM should exceed the combined packed size of the two sequences being compared.
+
+**What sampling method was used to make the sequences in `test_data/`?**
 Poisson-disk sampling via CloudCompare, with a 100 K-point cap on the densest sequences (F, M). Uniform random sampling produces a noisier surface and slightly destabilises the JND threshold; Poisson-disk gave the tightest pilot-study results.
 
 **What does `occupancyPrecision` in the rate-point table actually mean?**
