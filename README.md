@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="opendpc.PNG" alt="OpenDPC" width="280"/>
+<img src="opendpc.PNG" alt="OpenDPC" width="380"/>
 
 **An open-source dynamic point cloud player and a paired-comparison platform for just-noticeable-distortion annotation**
 
