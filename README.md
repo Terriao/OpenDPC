@@ -349,9 +349,6 @@ Yes. The JND harness only needs an ordered set of subfolders, one per rate point
 **What's the data licence on the 18 sequences?**
 The source `.glb` models are individually licensed via Sketchfab and are not redistributed in this repo. The conversion scripts and the encoded V-PCC ladders are released under the same MIT licence as the codebase; consult the individual model licences before redistributing the raw asset.
 
-**Why is the executable named `JNDModelStreamViewer.exe` instead of `OpenDPC.exe`?**
-Historical — the JND sub-platform was the first component built, and the executable name has stuck across releases. The two names refer to the same application; alignment is on the to-do list for the next public build.
-
 **Where are the session logs written?**
 Under `<install>/Logs/`, one file per session, rolled at a fixed file-count cap. The log records the full ternary-search path (or the linear-scan path) and any UI / asset-loading exceptions raised during the session.
 
