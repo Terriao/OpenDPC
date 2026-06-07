@@ -1,0 +1,108 @@
+# ============================================================
+# File: .github/ISSUE_TEMPLATE/bug_report.yml
+# Repo: https://github.com/Terriao/OpenDPC
+# ============================================================
+
+name: Bug report
+description: Something is broken or behaving unexpectedly in OpenDPC.
+title: "[BUG] "
+labels: ["bug", "triage"]
+assignees:
+  - Terriao
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in the form below as completely as you can —
+        the more detail you provide, the faster the issue can be reproduced and fixed.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component is affected?
+      options:
+        - "PontZen preprocessing tool"
+        - "Dynamic point cloud player (Player Mode)"
+        - "JND sub-platform — Settings panel"
+        - "JND sub-platform — Playing / paired-comparison view"
+        - "JND sub-platform — Dichotomizing search controller"
+        - "JND sub-platform — Linear search mode"
+        - "Result file export (ResultSaver)"
+        - "Session log (FileLogger)"
+        - "V-PCC distortion ladder configs (ctc_configs/)"
+        - "Test sequences (test_data/)"
+        - "Documentation / README"
+        - "Unity build / installation"
+        - "Other (describe below)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug. What did you expect to see, and what did you actually observe?
+      placeholder: |
+        When I open a JND session on the bundled actor sequence with the default settings,
+        the paired-comparison view freezes after the third trial. No error dialog appears.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps that reliably trigger the bug.
+      placeholder: |
+        1. Extract software_v2.0.rar, double-click JNDModelStreamViewer.exe.
+        2. Home Panel → JND Mode.
+        3. Set Reference Folder = test_data/actor/reference, Distortion Folder = test_data/actor/ladder.
+        4. Viewing seconds = 6, FPS = 15, Scale = 3, Search Mode = Dichotomizing.
+        5. Click Start. The viewer freezes after trial 3.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, GPU, VRAM, Unity version (if building from source).
+      placeholder: |
+        - OS: Windows 11 23H2
+        - GPU: NVIDIA RTX 3060 (12 GB VRAM)
+        - Display: 1920x1080 @ 144 Hz
+        - Built from source? No (using software_v2.0.rar)
+    validations:
+      required: true
+
+  - type: textarea
+    id: sequence-info
+    attributes:
+      label: Sequence and JND configuration
+      description: Which sequence (reference + distortion ladder) was loaded, and what config values were used?
+      placeholder: |
+        - Reference sequence: test_data/actor (~10^5 points/frame, 64 frames)
+        - Distortion ladder: 20 rate points r1-r20
+        - Search mode: Dichotomizing
+        - Viewing seconds: 6, FPS: 15, Scale: 3
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Session log
+      description: Please attach the relevant file from <install>/Logs/.
+      render: text
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched the existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: I have read the relevant section of the README and the FAQ.
+          required: true
+        - label: I have checked that available VRAM exceeds the combined size of the two sequences being compared.
+          required: false
