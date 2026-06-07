@@ -2,15 +2,18 @@
 
 <img src="logo.PNG" alt="OpenDPC" width="380"/>
 
-**An open-source dynamic point cloud player and a paired-comparison platform for just-noticeable-distortion annotation**
+**An open-source Unity-based dynamic point cloud player and paired-comparison platform for just-noticeable-distortion annotation**
 
 [![Engine](https://img.shields.io/badge/built%20on-Unity-000000?logo=unity&logoColor=white)](#)
 [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows&logoColor=white)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
+[![Source](https://img.shields.io/badge/source-Unity%20project%20%2B%20binary-success)](#getting-started)
 [![Paper](https://img.shields.io/badge/ACM%20MM-2026%20(under%20review)-orange)](#citation)
 [![Demo](https://img.shields.io/badge/demo-online-success)](https://docs.google.com/presentation/d/1kI2ak1zXNcYN4-CCj-AFejLzboaM6lWH/edit?usp=sharing)
 
 **🔗 GitHub:** <https://github.com/Terriao/OpenDPC>
+
+**Source code:** [`src/`](src/) (Unity project) · **Prebuilt binary:** [Releases](https://github.com/Terriao/OpenDPC/releases) · **Demo sequences:** [`demo_data/`](demo_data/)
 
 </div>
 
@@ -18,14 +21,34 @@
 
 ## Why this project exists
 
-A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The ecosystem around it, however, has lagged. Almost every viewer in circulation is a static-point-cloud tool patched to accept a folder of `.ply` files, breaking the moment a sequence runs past a few hundred frames or carries non-trivial colour attributes. And almost every JND or perceptual study on dynamic point clouds is run on bespoke, never-released code, so the next group has to rebuild the apparatus before it can rebuild the science.
+A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: end-to-end real-time pipelines for tele-presence (cwipc / VR2Gather), capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains missing is a tool that pairs **interactive playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
 
-OpenDPC is one Unity-based project that addresses both gaps at once:
+OpenDPC fills exactly this gap. It is a Unity-based application that addresses two needs at once:
 
-1. **A real dynamic point cloud player** — frame-rate-correct, GPU-resident, interactive, looped, and built to handle full-length sequences without stuttering.
-2. **A subjective JND annotation harness** — a paired-comparison interface for locating the lowest V-PCC rate point at which distortion crosses the perceptual threshold, on a per-sequence per-subject basis.
+1. **A dynamic point cloud player** — frame-rate-correct, GPU-resident, interactive, looped, and built to handle full-length sequences without stuttering.
+2. **An integrated JND annotation harness** — a paired-comparison interface for locating the lowest V-PCC rate point at which distortion crosses the perceptual threshold, on a per-sequence per-subject basis, over a published 20-point V-PCC ladder.
 
 > *"Dynamic point clouds need playback infrastructure that is as boring and as reliable as a video player — and a perceptual-evaluation layer that does not get rebuilt every time a paper is written. OpenDPC tries to be both."*
+
+---
+
+## Position relative to prior work
+
+OpenDPC is *not* the first system to render dynamic point clouds. It is, to our knowledge, the first **open-source** tool that combines a Unity-based dynamic point cloud player with an integrated, reproducible **JND annotation pipeline** over a published V-PCC distortion ladder, and that releases the **subjective-experiment data** (60 subjects × 18 sequences × 20 rate points) alongside the software.
+
+| System | Domain | Player | JND harness | Public distortion data | Open source |
+|---|---|:---:|:---:|:---:|:---:|
+| **cwipc / VR2Gather** (ACM MM 2024) | Social VR / tele-presence | ✓ | — | — | ✓ |
+| **Hofer et al.** (IC3D 2018) | Capture-to-display pipeline | ✓ | — | — | — |
+| **Mei et al.** (ICAICA 2023) | Web viewer for manufacturing | ✓ (static-friendly) | — | — | — |
+| **CloudCompare / MeshLab / potree** | Static point cloud editing/viewing | — (no sequence support) | — | — | ✓ |
+| **OpenDPC** *(this work)* | DPC playback + JND annotation | ✓ | ✓ | ✓ (60 subjects, V-PCC 20-rate) | ✓ |
+
+The contribution we claim is not "first player" but **first integrated, reproducible JND pipeline for compressed dynamic point clouds with publicly released subjective data**.
+
+### Relation to OpenVPC
+
+OpenDPC and our concurrent **OpenVPC** project are sister codebases with distinct scope. OpenVPC is a broad collection of objective and subjective tools for **static** point clouds. OpenDPC is purpose-built for **dynamic sequences** and contributes three artefacts that OpenVPC does not: (i) a Unity real-time player for `.ply` sequences, (ii) a paired-comparison JND harness adapted to the *temporal* nature of dynamic content — with the dwell-time clock, camera-locked synchronisation, and frame-rate control that are meaningless for static models — and (iii) a published 60-subject JND dataset over the V-PCC 20-rate ladder. The JND interface concept overlaps; the experimental protocol, the released dataset, and the player do not.
 
 ---
 
@@ -104,6 +127,8 @@ All three components live inside a single Unity application; the user picks **Pl
 
 ## Getting started
 
+> **Source code is in [`src/`](src/) in this repository.** The Unity project is provided as-is; the pre-built `JNDModelStreamViewer.exe` in the Releases page is built from the exact same source tree.
+
 ### For end users (running the pre-built binary)
 
 **Prerequisites.** A 64-bit **Windows** machine with a discrete GPU (≥ 4 GB VRAM recommended for sequences denser than 10⁶ points per frame). The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
@@ -112,9 +137,11 @@ All three components live inside a single Unity application; the user picks **Pl
 
 1. Download `software_v2.0.zip` from the [Releases](https://github.com/Terriao/OpenDPC/releases) page.
 2. Extract the archive to any local folder.
-3. Double-click **`JNDModelStreamViewer.exe`** to launch the application.
+3. Double-click **`JNDModelStreamViewer.exe`** to launch.
 
-**Prepare a sequence.** Place the per-frame `.ply` files of one sequence in a single folder, ordered lexicographically (`0001.ply`, `0002.ply`, …). For the JND module, also prepare a parent folder containing one subfolder per distortion rate point (one subfolder per rate, with frame indexing matching the reference).
+**Demo data.** The `demo_data/` folder in the repository ships three short sample sequences (`actor_demo/`, `bee_demo/`, `helicopter_demo/`) plus one full V-PCC distortion ladder so the JND module is testable out of the box without your having to produce your own assets.
+
+**Prepare your own sequence.** Place the per-frame `.ply` files of one sequence in a single folder, ordered lexicographically (`0001.ply`, `0002.ply`, …). For the JND module, also prepare a parent folder containing one subfolder per distortion rate point, with frame indexing matching the reference.
 
 **Choose a mode.** At launch the **Home Panel** presents two entry points:
 
@@ -123,7 +150,7 @@ All three components live inside a single Unity application; the user picks **Pl
 
 ### For developers (building from source)
 
-The Unity project source lives under `src/` in the repository.
+The Unity project source lives under [`src/`](src/) in the repository.
 
 **Prerequisites.** Unity 2022.3 LTS or later.
 
@@ -160,6 +187,8 @@ Interactive controls during playback:
 </table>
 </div>
 
+> **Format support.** The current release accepts `.ply` only (the common output of V-PCC, G-PCC, and most acquisition pipelines). Importers for `.pcd`, `.las`, `.e57`, and `.obj→.ply` on-the-fly conversion are on the [roadmap](#roadmap); contributions welcome.
+
 ---
 
 ## The JND sub-platform in detail
@@ -190,21 +219,25 @@ The viewer shows the pristine sequence on the left and the candidate distorted s
 The Settings Panel offers a **Search Mode** selector that determines how the harness walks the rate-point ladder:
 
 - **Dichotomizing** *(default)* — the ternary-refinement controller described below. ~4–5 paired comparisons per sequence; the right choice for most subjective studies.
-- **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the JND distribution itself (not just the threshold) is of interest.
+- **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the full JND distribution (not just the threshold) is of interest.
 
 ### The ternary-search controller (Dichotomizing mode)
+
+> **Terminology note.** The "interval" walked by the controller is a **rate-point interval** along the V-PCC distortion ladder — *not* a temporal interval within the sequence. Every comparison shows the **full sequence** from start to end; the controller only changes *which rate point* on the ladder gets paired against the reference.
 
 Locating the JND boundary in a twenty-point distortion ladder by exhaustive comparison would need twenty trials per subject per sequence. We use a **ternary refinement** instead of a pure bisection, which is gentler on the noisy verdicts that subjective experiments inevitably produce:
 
 ```
-Initial interval: [r1, r20]            (whole ladder)
-Loop until interval has length 1:
-    candidate ← midpoint of interval
-    show paired comparison: reference vs candidate
+Initial rate-point interval:  [r_lo, r_hi]  =  [r1, r20]
+Loop until |r_hi - r_lo| ≤ 1:
+    r_mid ← round( (r_lo + r_hi) / 2 )         the midpoint rate point on the ladder
+    show paired comparison: reference  vs  candidate-at-r_mid (full sequence, both sides)
     wait for verdict (button unlocks after 6 s)
-    if verdict = "Similar":            -->  trim left third of interval
-    if verdict = "Different":          -->  trim right third of interval
-Output: lower end of the final interval = subject's JND rate point
+    if verdict = "Similar":      r_lo ← r_lo + ⌈(r_hi - r_lo) / 3⌉
+                                 (drop the lower-rate, higher-quality third — still imperceptible there)
+    if verdict = "Different":    r_hi ← r_hi - ⌈(r_hi - r_lo) / 3⌉
+                                 (drop the higher-rate, lower-quality third — threshold lies below r_mid)
+Output: r_lo of the final interval  =  this subject's JND rate point for this sequence
 ```
 
 Trimming **a third** rather than a half at each step costs a small number of extra comparisons relative to plain bisection — but the surplus dampens the noise that comes from low-confidence verdicts near the threshold, and the rate point the controller settles on lands closer to the true JND across our subject pool. A more aggressive halving converges faster but is brittle when the subject is uncertain on the very comparison that drives the next decision.
@@ -228,7 +261,7 @@ The repository ships a curated library of eighteen dynamic models sourced from S
 
 ### V-PCC rate-point configuration
 
-| Rate point | occupancyPrecision | Geometry QP | Attribute QP | Quality tier |
+| Rate point | occupancyPrecision † | Geometry QP | Attribute QP | Quality tier |
 |:---:|:---:|:---:|:---:|:---|
 | r1  | 2 | −12 | 0  | Lossless |
 | r2  | 2 | −6  | 6  | Near-lossless |
@@ -251,6 +284,8 @@ The repository ships a curated library of eighteen dynamic models sourced from S
 | r19 | 4 | 32  | 42 | Low quality · **CTC R5** |
 | r20 | 4 | 36  | 48 | Very-low quality |
 
+> † `occupancyPrecision` is the V-PCC reference-encoder *occupancy-map precision parameter* — a **dimensionless block-size index** (geometry block precision in voxel units of the underlying grid), not a physical distance in mm or cm. The Geometry-QP and Attribute-QP columns are standard V-PCC quantisation parameters.
+
 Total compressed asset size: 18 sequences × 20 rate points × 64 frames = **23,040 distorted frames** ready for evaluation.
 
 ### Asset preparation pipeline
@@ -261,7 +296,9 @@ Source `.glb` models from Sketchfab were converted to colour-bearing `.ply` sequ
 .glb (Sketchfab)  ──Blender──►  .obj + textures  ──CloudCompare batch──►  .ply sequence
 ```
 
-We made the conversion batch-scriptable rather than interactive, so adding new sequences to the test library is a single command.
+**Sampling method.** The `.obj → .ply` conversion uses **CloudCompare's Poisson-disk sampling** to produce a roughly uniform point density across the surface (cf. uniform random sampling, which under-samples low-curvature regions). For very fine geometry (sequences F, M) we additionally cap the per-frame point count at 100 K to keep playback responsive on mid-range GPUs. The choice of sampler does affect downstream JND thresholds — uniform random sampling typically yields a noisier surface and slightly lower (more sensitive) JND values; Poisson-disk gives the most stable thresholds in our pilot study, which is why we adopted it. The script is parameterised, so switching sampler is a one-flag change.
+
+The whole pipeline is batch-scriptable rather than interactive, so adding new sequences to the test library is a single command.
 
 ---
 
@@ -309,7 +346,9 @@ Outlier verdicts were trimmed under the **ITU-R BT.500-13** screening rule befor
 
 This has a direct codec-side implication. If a V-PCC encoder picks any rate point above r15 for a perceptually-lossless target, it is leaving bandwidth on the floor — distortion at r15 is already invisible to most observers. If it picks anything below r10, it is buying marginal bitrate savings against visible quality loss. The r10–r15 band is the sweet spot for **maximally aggressive yet perceptually-safe** V-PCC compression.
 
-**Low-motion sequences yield tighter agreement.** Sequences **D, J, P, and N** show the smallest inter-subject standard deviation — they also happen to be the four sequences with the smallest frame-to-frame motion. With less motion, temporal masking weakens, the JND threshold depends less on each viewer's tracking strategy, and verdicts converge. A practical consequence: high-motion content needs more subjects per study to reach the same confidence as low-motion content.
+**Low-motion sequences yield tighter agreement.** Sequences **D, J, P, and N** show the smallest inter-subject standard deviation — they also happen to be the four sequences with the smallest frame-to-frame motion. With less motion, temporal masking weakens, the JND threshold depends less on each viewer's tracking strategy, and verdicts converge. A practical consequence: high-motion content needs more subjects per study to reach the same confidence as low-motion content, and any future JND model for dynamic point clouds should be evaluated *separately* on high- and low-motion subsets.
+
+> **On choice of perceptual signal.** Our current evaluation uses overall V-PCC distortion as the visibility variable, not a temporal-artifact-specific signal (e.g., flicker, surface popping, or seam discontinuities under V-PCC patch updates). This is a deliberate scoping choice: V-PCC distortion is the signal that codec implementers actually tune, so the published JND thresholds are immediately actionable for rate-control work. Adding a dedicated **temporal-artefact JND track** (variant comparisons that hold spatial quality fixed and vary temporal artefact severity) is one of the main items on the [roadmap](#roadmap).
 
 ---
 
@@ -319,7 +358,7 @@ OpenDPC has been built with three downstream applications in mind:
 
 1. **Rate-distortion calibration for dynamic point cloud codecs.** Use the JND results to set perceptually-meaningful target bitrates instead of arbitrary PSNR points.
 2. **Subjective ground truth for point cloud quality assessment.** Pair the JND ladder with objective quality scores to train and validate PCQA models.
-3. **Demos and pedagogy.** The player on its own is the cleanest demo platform we know of for showcasing dynamic point cloud capture, compression, or rendering algorithms.
+3. **Demos and pedagogy.** The player on its own is a clean demo platform for showcasing dynamic point cloud capture, compression, or rendering algorithms.
 
 The repository is permissively licensed for both research and commercial extension.
 
@@ -328,6 +367,8 @@ The repository is permissively licensed for both research and commercial extensi
 ## Roadmap
 
 - **Cross-platform builds** — the current public release is Windows-only (uses native Win32 file dialogs and folder pickers via `Win32API`/`VistaFileDialog`). The Unity codebase is portable; macOS and Linux build profiles are on the immediate roadmap, blocked only on substituting `Standalone File Browser` for the native Windows shell calls.
+- **Broader format support** — importers for `.pcd`, `.las`, `.e57`, and on-the-fly `.obj → .ply` conversion, removing the current `.ply`-only restriction.
+- **Temporal-artefact JND track** — paired-comparison variants that hold spatial quality constant and vary *temporal* distortions (flicker, V-PCC patch popping, seam discontinuities), so that motion-specific perceptual thresholds can be measured alongside the spatial-distortion thresholds reported here.
 - **GPU-streamed long sequences** — current VRAM-resident pipeline caps sequences at the GPU's free memory; a sliding-window streamer is in development.
 - **Automated JND batch mode** — head-mounted display integration and automated session orchestration to scale subjective studies.
 - **Beyond V-PCC** — distortion ladders generated by G-PCC and by emerging learned codecs.
@@ -336,6 +377,9 @@ The repository is permissively licensed for both research and commercial extensi
 ---
 
 ## FAQ
+
+**How does OpenDPC differ from cwipc / VR2Gather, Hofer 2018, or potree?**
+Those systems target *rendering* (and in the case of VR2Gather, *transmission*) of dynamic point clouds for tele-presence or visualisation. OpenDPC adds a **subjective-evaluation harness** for compressed dynamic point clouds, with a published V-PCC distortion ladder and 60-subject JND data. The player itself is competitive with those tools; the JND pipeline is the unique contribution.
 
 **Why Unity and not a custom OpenGL renderer?**
 Unity gave us a working cross-platform shader pipeline on day one, an interaction layer (drag, zoom, UI panels) that did not need to be hand-rolled, and a build system that targets Windows, macOS, and Linux from the same source tree. The cost is a heavier runtime; the saving is months of engineering. For a research-grade tool, the trade lands in Unity's favour.
@@ -346,8 +390,14 @@ About 12–15 minutes for the nine sequences in one group, under the default Dic
 **Can I plug in my own distortion ladder?**
 Yes. The JND harness only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the harness.
 
+**What sampling method was used to make the `.ply` sequences?**
+Poisson-disk sampling via CloudCompare, with a 100 K-point cap on the densest sequences (F, M). Uniform random sampling produces a noisier surface and slightly destabilises the JND threshold; Poisson-disk gave the tightest pilot-study results. The conversion script is parameterised, so other samplers can be swapped in.
+
+**What does `occupancyPrecision` in the rate-point table actually mean?**
+It is the V-PCC reference encoder's occupancy-map precision parameter — a *dimensionless block-size index* over the geometry voxel grid. It does **not** carry a metric unit (mm/cm).
+
 **What's the data licence on the 18 sequences?**
-The source `.glb` models are individually licensed via Sketchfab and are not redistributed in this repo. The conversion scripts and the encoded V-PCC ladders are released under the same MIT licence as the codebase; consult the individual model licences before redistributing the raw asset.
+The source `.glb` models are individually licensed via Sketchfab and are not redistributed in this repo. The conversion scripts and the encoded V-PCC ladders are released under the same MIT licence as the codebase; consult the individual model licences before redistributing the raw asset. The `demo_data/` folder ships only sequences whose source licences permit redistribution.
 
 **Where are the session logs written?**
 Under `<install>/Logs/`, one file per session, rolled at a fixed file-count cap. The log records the full ternary-search path (or the linear-scan path) and any UI / asset-loading exceptions raised during the session.
@@ -382,6 +432,8 @@ We welcome:
 - New test sequences (please bring their Sketchfab / source licence)
 - Distortion-ladder generators for codecs other than V-PCC
 - Cross-platform builds (macOS, Linux) and the file-dialog refactor that unblocks them
+- Importers for additional point cloud formats (`.pcd`, `.las`, `.e57`)
+- Temporal-artefact JND protocols
 - Translations of the in-app strings (currently English-only)
 - Bug reports, especially around long sequences, large attributes, and edge cases in the Dichotomizing controller
 
@@ -397,7 +449,7 @@ Source code is released under the **MIT License**. Encoded V-PCC distortion ladd
 
 ## Acknowledgements
 
-OpenDPC stands on the work of the **MPEG V-PCC** standardisation activity, the **ITU-R BT.500-13** subjective-evaluation methodology, and the dynamic 3D modelling community that contributes content to **Sketchfab**. The Unity engine and the broader graphics-tools ecosystem made the player implementation possible.
+OpenDPC builds on the work of the **MPEG V-PCC** standardisation activity, the **ITU-R BT.500-13** subjective-evaluation methodology, the **Unity** engine, and the dynamic 3D modelling community that contributes content to **Sketchfab**. We acknowledge prior open and academic work on dynamic point cloud visualisation, including **cwipc / VR2Gather** (Jansen et al., ACM MM 2024), **Hofer et al.** (IC3D 2018), and **Mei et al.** (ICAICA 2023) — OpenDPC is positioned as a complement to those systems, not a replacement.
 
 We thank the sixty subjects who participated in the JND study, and **Peng Cheng Laboratory** together with the **OpenI** platform for compute resources and the planned public mirror of the repository.
 
