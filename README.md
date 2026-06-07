@@ -15,7 +15,7 @@
 </div>
 
 > **Resources at a glance:**
-> 📦 **Prebuilt software** → <https://github.com/Terriao/OpenDPC/blob/main/Software>
+> 📦 **Prebuilt software** → <https://github.com/Terriao/OpenDPC/blob/main/Software>\n
 > 🎚 **V-PCC distortion ladder configs (20 rate points)** → <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>
 > 🧪 **Test sequences** → <https://github.com/Terriao/OpenDPC/tree/main/test_data>
 
