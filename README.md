@@ -50,10 +50,6 @@ OpenDPC sits in a different design point. Rather than optimising for live captur
 
 The contribution we claim is the **integrated JND annotation workflow with the released ladder and dataset**, not a novel rendering algorithm.
 
-### Relation to OpenVPC
-
-OpenDPC and our concurrent **OpenVPC** project are sister codebases with distinct scope. OpenVPC is a broad collection of objective and subjective tools for **static** point clouds. OpenDPC is purpose-built for **dynamic sequences** and contributes three artefacts that OpenVPC does not: (i) a Unity real-time player for `.ply` sequences, (ii) a paired-comparison JND harness adapted to the *temporal* nature of dynamic content — with the dwell-time clock, camera-locked synchronisation, and frame-rate control that are meaningless for static models — and (iii) a published 60-subject JND dataset over the V-PCC 20-rate ladder for 18 dynamic sequences. The JND interface concept overlaps; the experimental protocol, the released dataset, and the player do not.
-
 ---
 
 ## Contents
