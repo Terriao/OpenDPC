@@ -2,7 +2,7 @@
 
 <img src="logo.PNG" alt="OpenDPC" width="700"/>
 
-**An open-source dynamic point cloud player and paired-comparison platform for just-noticeable-distortion annotation**
+**An open-source dynamic point cloud player and paired-comparison platform for just noticeable distortion annotation**
 
 [![Engine](https://img.shields.io/badge/built%20on-Unity-000000?logo=unity&logoColor=white)](#)
 [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows&logoColor=white)](#)
