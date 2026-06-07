@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.PNG" alt="OpenDPC" width="500"/>
+<img src="logo.PNG" alt="OpenDPC" width="700"/>
 
 **An open-source Unity-based dynamic point cloud player and paired-comparison platform for just-noticeable-distortion annotation**
 
