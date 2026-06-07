@@ -1,0 +1,71 @@
+# ============================================================
+# File: .github/ISSUE_TEMPLATE/feature_request.yml
+# Repo: https://github.com/Terriao/OpenDPC
+# ============================================================
+
+name: Feature request
+description: Propose a new capability for the player, the JND sub-platform, or the preprocessing pipeline.
+title: "[FEAT] "
+labels: ["enhancement", "triage"]
+assignees:
+  - Terriao
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea to make OpenDPC more useful? Please describe the use case first, then the proposed
+        implementation if you have one in mind.
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: What kind of feature?
+      options:
+        - "Player — new playback / interaction feature"
+        - "Player — new input format (.pcd, .las, .e57, .obj, ...)"
+        - "JND sub-platform — new search controller"
+        - "JND sub-platform — new output / result format"
+        - "JND sub-platform — HMD / VR support"
+        - "PontZen — new normalisation / packing scheme"
+        - "Cross-platform port (macOS / Linux)"
+        - "G-PCC or learned-codec distortion ladder"
+        - "Automation / batch mode"
+        - "Documentation / tutorial"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why is this needed?
+      description: What is the use case? What problem does it solve?
+      placeholder: |
+        Currently OpenDPC can only accept .ply sequences. We capture our point clouds with a depth-camera
+        rig that writes .pcd directly, and converting to .ply for every session is a several-minute
+        bottleneck.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed implementation
+      description: Sketch the design if you have one. UI changes, file-format changes, library choices, etc.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you tried a workaround? Are there other tools that do this?
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched existing issues and Discussions for similar proposals.
+          required: true
+        - label: I am willing to help implement, test, or document this feature.
+          required: false
