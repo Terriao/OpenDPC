@@ -5,6 +5,7 @@
 **An open-source dynamic point cloud player and a paired-comparison platform for just-noticeable-distortion annotation**
 
 [![Engine](https://img.shields.io/badge/built%20on-Unity-000000?logo=unity&logoColor=white)](#)
+[![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows&logoColor=white)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Paper](https://img.shields.io/badge/ACM%20MM-2026%20(under%20review)-orange)](#citation)
 [![Demo](https://img.shields.io/badge/demo-online-success)](https://docs.google.com/presentation/d/1kI2ak1zXNcYN4-CCj-AFejLzboaM6lWH/edit?usp=sharing)
@@ -54,9 +55,9 @@ OpenDPC is one Unity-based project that addresses both gaps at once:
 |---|---|---|
 | 1 | **Dynamic point cloud processor** | A pre-rendering step that normalises geometry and bit-packs RGB-plus-luminance into a single 32-bit integer per point, ready for the GPU. |
 | 2 | **Dynamic point cloud player** | Real-time looping playback of `.ply` sequences with pause / resume, frame counter, configurable FPS, free rotation, and free zoom. |
-| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a ternary-search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
+| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a Dichotomizing-or-Linear search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
 
-All three components share the same Unity project and the same data preprocessing path, so a sequence ingested once is ready for either playback or perceptual evaluation.
+All three components live inside a single Unity application; the user picks **Player Mode** or **JND Mode** from a Home Panel at launch, and the same preprocessing path serves both.
 
 ---
 
@@ -78,15 +79,23 @@ All three components share the same Unity project and the same data preprocessin
                   │  · 32-bit RGB+luminance pack  │
                   └───────────────┬───────────────┘
                                   │  GPU buffers
-                  ┌───────────────┴───────────────┐
-                  │                               │
-       ┌──────────▼──────────┐          ┌─────────▼──────────┐
-       │  ❷ Player           │          │  ❸ JND sub-platform │
-       │  · loop playback    │          │  · paired view      │
-       │  · pause / resume   │          │  · synced camera    │
-       │  · FPS control      │          │  · ternary search   │
-       │  · rotate / zoom    │          │  · 6 s dwell timer  │
-       └─────────────────────┘          └────────────────────┘
+                  ┌───────────────▼───────────────┐
+                  │        Home Panel             │
+                  │     (mode selection)          │
+                  └───────────────┬───────────────┘
+                                  │
+              ┌───────────────────┴───────────────────┐
+              │                                       │
+   ┌──────────▼──────────┐               ┌────────────▼────────────┐
+   │  ❷ Player           │               │  ❸ JND sub-platform     │
+   │     Settings        │               │     Settings            │
+   │       ↓             │               │       ↓                 │
+   │     Playing         │               │     Playing             │
+   │  · loop playback    │               │  · paired view          │
+   │  · pause / resume   │               │  · synced camera        │
+   │  · FPS control      │               │  · dichotomizing/linear │
+   │  · rotate / zoom    │               │  · 6 s dwell timer      │
+   └─────────────────────┘               └─────────────────────────┘
 </pre>
 </td></tr></table>
 </div>
@@ -95,21 +104,35 @@ All three components share the same Unity project and the same data preprocessin
 
 ## Getting started
 
-**Prerequisites.** Unity 2022.3 LTS or later. A discrete GPU with ≥ 4 GB VRAM is recommended for sequences longer than 200 frames or denser than 10⁶ points per frame.
+### For end users (running the pre-built binary)
 
-**Clone and open.**
+**Prerequisites.** A 64-bit **Windows** machine with a discrete GPU (≥ 4 GB VRAM recommended for sequences denser than 10⁶ points per frame). The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
+
+**Install and run.**
+
+1. Download `software_v2.0.zip` from the [Releases](https://github.com/Terriao/OpenDPC/releases) page.
+2. Extract the archive to any local folder.
+3. Double-click **`JNDModelStreamViewer.exe`** to launch the application.
+
+**Prepare a sequence.** Place the per-frame `.ply` files of one sequence in a single folder, ordered lexicographically (`0001.ply`, `0002.ply`, …). For the JND module, also prepare a parent folder containing one subfolder per distortion rate point (one subfolder per rate, with frame indexing matching the reference).
+
+**Choose a mode.** At launch the **Home Panel** presents two entry points:
+
+- **Player Mode** → opens the playback **Settings Panel**, where you point at one sequence folder and adjust FPS / scale, then click *Start* to enter the **Playing Panel**.
+- **JND Mode** → opens the annotation **Settings Panel**, where you supply the reference folder *and* the distortion-ladder folder, configure viewing seconds / FPS / scale / search mode, then click *Start* to enter the paired-comparison **Playing Panel**.
+
+### For developers (building from source)
+
+The Unity project source lives under `src/` in the repository.
+
+**Prerequisites.** Unity 2022.3 LTS or later.
 
 ```bash
 git clone https://github.com/Terriao/OpenDPC.git
+cd OpenDPC/src
 ```
 
-Open the project root in Unity Hub → *Open* → *Add project from disk*. Let Unity import; the first import resolves shaders and asset references and takes a few minutes.
-
-**Prepare a sequence.** Place the per-frame `.ply` files of one sequence in a single folder, ordered lexicographically (`0001.ply`, `0002.ply`, …). The processor will pick them up automatically when you point the player at the folder.
-
-**Run the player.** Open the `Player` scene → Press Play → select the sequence folder in the settings panel → click *Start*. Playback begins immediately at the configured FPS.
-
-**Run the JND harness.** Open the `JNDViewer` scene → select the reference folder and the distortion-ladder folder → set viewing seconds, FPS, and model scale if you want non-default values → click *Start*. The harness then drives the ternary-search loop described below.
+Open the project root in Unity Hub → *Open* → *Add project from disk*. There is a single scene that contains all panels (Home, Player Settings/Playing, JND Settings/Playing, System); the first import resolves shaders and asset references and takes a few minutes. To produce a Windows build identical to the released `JNDModelStreamViewer.exe`, use *File → Build Settings → Windows → Build*.
 
 ---
 
@@ -141,7 +164,7 @@ Interactive controls during playback:
 
 ## The JND sub-platform in detail
 
-<p align="center"><img src="jndviewer.png" alt="JND sub-platform configuration"  width="640"/></p>
+<p align="center"><img src="jndviewer.png" alt="JND sub-platform configuration" width="640"/></p>
 
 ### Configuration
 
@@ -153,7 +176,8 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 | **FPS** | 15 fps | Playback rate during evaluation. Lower than typical real-time playback to keep per-frame attention high. |
 | **Model scale** | 3× | Apparent size of the model. Held constant so that retinal projection is comparable across subjects and sessions. |
 | **Reference folder** | — | The pristine sequence. |
-| **Distortion ladder folder** | — | A folder of subfolders, one per rate point, sorted by ascending distortion. |
+| **Distortion ladder folder** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
+| **Search Mode** | Dichotomizing | Selects the controller that walks the rate points (see [below](#search-mode)). |
 
 ### The viewer
 
@@ -161,7 +185,14 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 
 The viewer shows the pristine sequence on the left and the candidate distorted sequence on the right. Crucially, **the two cameras are locked**: any rotation or zoom applied to one side is mirrored on the other, so the subject is never comparing apples and oranges at different angles. Two verdict buttons sit between the panels: `Similar` and `Different`.
 
-### The ternary-search controller
+### Search mode
+
+The Settings Panel offers a **Search Mode** selector that determines how the harness walks the rate-point ladder:
+
+- **Dichotomizing** *(default)* — the ternary-refinement controller described below. ~4–5 paired comparisons per sequence; the right choice for most subjective studies.
+- **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the JND distribution itself (not just the threshold) is of interest.
+
+### The ternary-search controller (Dichotomizing mode)
 
 Locating the JND boundary in a twenty-point distortion ladder by exhaustive comparison would need twenty trials per subject per sequence. We use a **ternary refinement** instead of a pure bisection, which is gentler on the noisy verdicts that subjective experiments inevitably produce:
 
@@ -177,6 +208,15 @@ Output: lower end of the final interval = subject's JND rate point
 ```
 
 Trimming **a third** rather than a half at each step costs a small number of extra comparisons relative to plain bisection — but the surplus dampens the noise that comes from low-confidence verdicts near the threshold, and the rate point the controller settles on lands closer to the true JND across our subject pool. A more aggressive halving converges faster but is brittle when the subject is uncertain on the very comparison that drives the next decision.
+
+Internally, the controller maintains a binary-tree representation of the visited rate-point intervals (`PointCloudBinaryTreeNodes`), so the full traversal of any session can be replayed post-hoc from the log file.
+
+### Outputs
+
+After a JND session finishes, the harness writes two artefacts:
+
+- **Result file** — a per-subject record of the converged JND rate point for every sequence in the run, written through a native Windows save-file dialog (`ResultSaver`). The path and format are user-selectable.
+- **Session log** — a rolling text log under `<install>/Logs/`, capped at the most recent N files (`FileLogger`). Useful for re-tracing a subject's verdict sequence or diagnosing UI / asset-loading issues after the fact.
 
 ---
 
@@ -287,7 +327,7 @@ The repository is permissively licensed for both research and commercial extensi
 
 ## Roadmap
 
-- **Cross-platform builds** — first-class Windows builds today; macOS and Linux build profiles on the immediate roadmap.
+- **Cross-platform builds** — the current public release is Windows-only (uses native Win32 file dialogs and folder pickers via `Win32API`/`VistaFileDialog`). The Unity codebase is portable; macOS and Linux build profiles are on the immediate roadmap, blocked only on substituting `Standalone File Browser` for the native Windows shell calls.
 - **GPU-streamed long sequences** — current VRAM-resident pipeline caps sequences at the GPU's free memory; a sliding-window streamer is in development.
 - **Automated JND batch mode** — head-mounted display integration and automated session orchestration to scale subjective studies.
 - **Beyond V-PCC** — distortion ladders generated by G-PCC and by emerging learned codecs.
@@ -301,13 +341,19 @@ The repository is permissively licensed for both research and commercial extensi
 Unity gave us a working cross-platform shader pipeline on day one, an interaction layer (drag, zoom, UI panels) that did not need to be hand-rolled, and a build system that targets Windows, macOS, and Linux from the same source tree. The cost is a heavier runtime; the saving is months of engineering. For a research-grade tool, the trade lands in Unity's favour.
 
 **How long does one JND annotation session take per subject?**
-About 12–15 minutes for the nine sequences in one group (J subjects ran group 1, K subjects ran group 2). Each sequence converges in 4–5 paired comparisons under the ternary search, plus the mandatory 6 s dwell time per comparison.
+About 12–15 minutes for the nine sequences in one group, under the default Dichotomizing search mode. Each sequence converges in 4–5 paired comparisons, plus the mandatory 6 s dwell time per comparison. Linear mode roughly quadruples the duration.
 
 **Can I plug in my own distortion ladder?**
 Yes. The JND harness only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the harness.
 
 **What's the data licence on the 18 sequences?**
 The source `.glb` models are individually licensed via Sketchfab and are not redistributed in this repo. The conversion scripts and the encoded V-PCC ladders are released under the same MIT licence as the codebase; consult the individual model licences before redistributing the raw asset.
+
+**Why is the executable named `JNDModelStreamViewer.exe` instead of `OpenDPC.exe`?**
+Historical — the JND sub-platform was the first component built, and the executable name has stuck across releases. The two names refer to the same application; alignment is on the to-do list for the next public build.
+
+**Where are the session logs written?**
+Under `<install>/Logs/`, one file per session, rolled at a fixed file-count cap. The log records the full ternary-search path (or the linear-scan path) and any UI / asset-loading exceptions raised during the session.
 
 ---
 
@@ -338,8 +384,9 @@ We welcome:
 
 - New test sequences (please bring their Sketchfab / source licence)
 - Distortion-ladder generators for codecs other than V-PCC
+- Cross-platform builds (macOS, Linux) and the file-dialog refactor that unblocks them
 - Translations of the in-app strings (currently English-only)
-- Bug reports, especially around long sequences, large attributes, and edge cases in the ternary-search controller
+- Bug reports, especially around long sequences, large attributes, and edge cases in the Dichotomizing controller
 
 Open an issue first for non-trivial contributions so we can align on interfaces. Pull requests are merged after review.
 
