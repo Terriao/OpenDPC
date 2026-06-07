@@ -23,7 +23,7 @@
 
 ## Why this project exists
 
-A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR (cwipc, VR2Gather), capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
+A dynamic point cloud is a *sequence* of point clouds, and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR (cwipc, VR2Gather), capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
 
 OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
