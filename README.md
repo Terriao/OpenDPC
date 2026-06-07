@@ -365,7 +365,7 @@ We thank the sixty subjects who participated in the JND study, and **Peng Cheng 
 |------|------|-------------|
 | Coordinator | Asso. Prof. Wei Gao | School of Electronic and Computer Engineering, Peking University · Peng Cheng Laboratory |
 | Lead developer | Wenxu Gao | School of Electronic and Computer Engineering, Peking University · Peng Cheng Laboratory |
-| Contributor | Songlin Fan | Institute of Trustworthy Embodied AI, Fudan University · ChinaMobileShanghaiICTCo.,Ltd. |
+| Contributor | Songlin Fan | Institute of Trustworthy Embodied AI, Fudan University · China Mobile Shanghai ICT Co., Ltd. |
 
 For questions, collaboration, OpenI mirror access, or push privileges, please contact:
 
