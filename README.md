@@ -14,10 +14,10 @@
 
 </div>
 
-> **Resources at a glance:**
-> 📦 **Prebuilt software** → [`Software/software_v2.0.rar`](https://github.com/Terriao/OpenDPC/blob/main/Software/software_v2.0.rar) · folder: <https://github.com/Terriao/OpenDPC/tree/main/Software>
-> 🧩 **Preprocessing tool** → [`preprocess_tool/PontZen_v3.exe`](https://github.com/Terriao/OpenDPC/blob/main/preprocess_tool/PontZen_v3.exe) · folder: <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>
-> 🎚 **V-PCC distortion ladder configs (20 rate points)** → [`ctc_configs/ctc-r01.cfg`](https://github.com/Terriao/OpenDPC/blob/main/ctc_configs/ctc-r01.cfg) … [`ctc-r20.cfg`](https://github.com/Terriao/OpenDPC/blob/main/ctc_configs/ctc-r20.cfg) · folder: <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>
+> **Resources at a glance:**  
+> 📦 **Prebuilt software** → <https://github.com/Terriao/OpenDPC/tree/main/Software>  
+> 🧩 **Preprocessing tool** → <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>  
+> 🎚 **Distortion ladder configs** → <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>  
 > 🧪 **Test sequences** → <https://github.com/Terriao/OpenDPC/tree/main/test_data>
 
 ---
