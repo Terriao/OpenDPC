@@ -62,7 +62,9 @@ All three components share the same Unity project and the same data preprocessin
 
 ## System architecture
 
-```
+<div align="center">
+<table><tr><td>
+<pre>
 ┌──────────────────────────────────────────────────────────────────────┐
 │                        Dynamic point cloud assets                    │
 │            (per-frame .ply files; one folder per sequence)           │
@@ -85,7 +87,9 @@ All three components share the same Unity project and the same data preprocessin
        │  · FPS control      │          │  · ternary search   │
        │  · rotate / zoom    │          │  · 6 s dwell timer  │
        └─────────────────────┘          └────────────────────┘
-```
+</pre>
+</td></tr></table>
+</div>
 
 ---
 
