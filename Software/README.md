@@ -21,13 +21,10 @@ software_v2.0/
 └── JNDModelStreamViewer_Data/              ← Unity runtime assets
     ├── Managed/
     ├── Resources/
-    ├── StreamingAssets/
     ├── boot.config
     ├── globalgamemanagers
     └── …
 ```
-
-> ℹ️ The executable is named `JNDModelStreamViewer.exe` for historical reasons — the JND sub-platform was the first component built. The two names (`OpenDPC` / `JNDModelStreamViewer`) refer to the same application; alignment is on the to-do list for the next public build.
 
 ---
 
