@@ -67,7 +67,6 @@ raw point clouds            PontZen_v3.exe              packed sequence
    …                                                       …
 ```
 
-For the 18 test sequences shipped with the project (see [`../test_data/`](../test_data)), the PontZen step has already been performed — those sequences load directly into the viewer with no further preprocessing.
 
 ---
 
