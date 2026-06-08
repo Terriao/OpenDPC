@@ -47,12 +47,6 @@ software_v2.0/
 3. Double-click `JNDModelStreamViewer.exe`.
 4. The **Home Panel** appears — pick `Player Mode` or `JND Mode`.
 
-### Smoke test in 60 seconds
-
-1. Grab one test sequence from [`../test_data/`](../test_data) (see that folder's README for the Google Drive download).
-2. Preprocess it with [`../preprocess_tool/PontZen_v3.exe`](../preprocess_tool/PontZen_v3.exe).
-3. In OpenDPC, open Player Mode, point at the preprocessed sequence folder, click *Start*. Playback should loop smoothly at the default 15 fps.
-
 ---
 
 ## 🧭 Operating modes
