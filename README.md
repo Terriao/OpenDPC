@@ -164,7 +164,7 @@ OpenDPC/
 
 ### Prerequisites
 
-A 64-bit **Windows** machine with a discrete GPU. For the JND module specifically, available VRAM must be large enough to hold **both** sequences (reference and one candidate distortion) at once — the module loads them simultaneously to keep paired-comparison latency below the rendering interval. A starting point: ≥ 4 GB VRAM for sequences denser than 10⁶ points per frame; more for higher-density content. The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
+A 64-bit **Windows** machine with a discrete GPU. For the JND module specifically, available VRAM must be large enough to hold **both** sequences (reference and one candidate distortion) at once — the module loads them simultaneously to keep paired-comparison latency below the rendering interval. A starting point: ≥ 4 GB VRAM for sequences denser than 10⁶ points per frame; more for higher-density content. 
 
 ### Install and run
 
