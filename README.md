@@ -181,7 +181,6 @@ The player expects sequences in a GPU-ready packed format produced by **PontZen*
 3. Run `PontZen_v3.exe`, point it at the source folder, and pick an output folder. PontZen processes each frame in turn.
 4. Point the player (or the JND module's reference / distortion-ladder fields) at the *output* folder.
 
-For the test data we already ship in [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data), the PontZen step has already been done — those sequences can be loaded into the player directly.
 
 ### Try it on the bundled test data
 
