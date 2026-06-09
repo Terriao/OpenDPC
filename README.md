@@ -37,7 +37,7 @@ OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
 Prior works on dynamic point cloud rendering methods include: Hofer et al. (IC3D 2018) built an end-to-end pipeline focused on capture-to-display latency for studio environments; Mei et al. (ICAICA 2023) released a web-based viewer optimised for industrial inspection of static and quasi-static parts; and the open-source cwipc library (used by VR2Gather, ACM MM 2024), which provides a C++/Unity stack for capturing, compressing, transmitting, and rendering point clouds in social-VR tele-presence applications, with its Unity package also capable of rendering pre-recorded sequences as a side feature of the capture pipeline.
 
-OpenDPC sits in a different design point. It targets the offline, reproducible subjective-evaluation workflow: a researcher loads a reference sequence and a fixed distortion ladder, runs a structured paired-comparison protocol, and exports a JND result that another lab can independently reproduce. The components OpenDPC contributes that the systems above do not bundle are: a paired-comparison JND module with a ternary-refinement controller, an integrated published V-PCC distortion ladder, and the accompanying 60-subject subjective dataset.
+OpenDPC sits in a different design point. It targets the offline, reproducible subjective-evaluation workflow: a researcher loads a reference sequence and a fixed distortion ladder, runs a structured paired-comparison protocol, and exports a JND result that another lab can independently reproduce. The components OpenDPC contributes that the systems above do not bundle are: a user-friendly dynamic point cloud playback interface, a paired-comparison JND module with a ternary-refinement controller, an integrated published V-PCC distortion ladder, and the accompanying 60-subject subjective dataset.
 
 | System | Primary purpose | Player | Built-in JND module | Public distortion ladder | Released subjective data |
 |---|---|:---:|:---:|:---:|:---:|
@@ -77,7 +77,7 @@ OpenDPC sits in a different design point. It targets the offline, reproducible s
 |---|---|---|
 | 1 | **Dynamic point cloud processor (PontZen)** | A standalone preprocessing tool that normalises geometry and bit-packs RGB-plus-luminance into a single 32-bit integer per point, ready for the GPU. |
 | 2 | **Dynamic point cloud player** | Real-time looping playback of point cloud sequences with pause / resume, frame counter, configurable FPS, free rotation, and free zoom. |
-| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a dichotomizing search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
+| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a ternary search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
 
 The player and JND sub-platform live inside a single Unity application; the user picks **Player Mode** or **JND Mode** from a Home Panel at launch. PontZen runs separately, ahead of either mode.
 
@@ -113,7 +113,7 @@ The player and JND sub-platform live inside a single Unity application; the user
    │     Playing         │               │     Playing             │
    │  · loop playback    │               │  · paired view          │
    │  · pause / resume   │               │  · synced camera        │
-   │  · FPS control      │               │  · dichotomizing/linear │
+   │  · FPS control      │               │  · ternary search       │
    │  · rotate / zoom    │               │  · 6 s dwell timer      │
    └─────────────────────┘               └─────────────────────────┘
 </pre>
