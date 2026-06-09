@@ -8,7 +8,6 @@
 [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows&logoColor=white)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Paper](https://img.shields.io/badge/ACM%20MM-2026%20(under%20review)-orange)](#citation)
-[![Demo](https://img.shields.io/badge/demo-online-success)](https://docs.google.com/presentation/d/1kI2ak1zXNcYN4-CCj-AFejLzboaM6lWH/edit?usp=sharing)
 
 **🔗 GitHub:** <https://github.com/Terriao/OpenDPC>
 
