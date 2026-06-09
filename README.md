@@ -414,8 +414,6 @@ OpenDPC has been built with three downstream applications in mind:
 2. **Subjective ground truth for point cloud quality assessment.** Pair the JND ladder with objective quality scores to train and validate PCQA models.
 3. **Demos and pedagogy.** The player on its own is a clean demo platform for showcasing dynamic point cloud capture, compression, or rendering algorithms.
 
-The repository is permissively licensed for both research and commercial extension.
-
 ---
 
 ## Roadmap
