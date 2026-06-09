@@ -46,7 +46,6 @@ OpenDPC sits in a different design point. Rather than optimising for live captur
 | **Mei et al.** (ICAICA 2023) | Web viewer for manufacturing | ✓ (static-friendly) | — | — | — |
 | **OpenDPC** *(this work)* | Offline DPC playback + JND annotation | ✓ | ✓ | ✓ (20-rate V-PCC) | ✓ (60 subjects) |
 
-The contribution we claim is the **integrated JND annotation workflow with the released ladder and dataset**, not a novel rendering algorithm.
 
 ---
 
