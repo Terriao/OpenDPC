@@ -351,7 +351,7 @@ Source `.glb` models from Sketchfab were converted to colour-bearing point cloud
 .glb (Sketchfab)  ──Blender──►  .obj + textures  ──CloudCompare batch──►  point cloud sequence
 ```
 
-**Sampling method.** The `.obj → point cloud` conversion uses **CloudCompare's Poisson-disk sampling** to produce a roughly uniform point density across the surface (cf. uniform random sampling, which under-samples low-curvature regions). For very fine geometry (sequences F, M) we additionally cap the per-frame point count at 100 K to keep playback responsive on mid-range GPUs. The choice of sampler does affect downstream JND thresholds — uniform random sampling typically yields a noisier surface and slightly lower (more sensitive) JND values; Poisson-disk gives the most stable thresholds in our pilot study. The script is parameterised, so switching sampler is a one-flag change.
+**Sampling method.** The `.obj → point cloud` conversion uses Poisson-disk sampling to produce a roughly uniform point density across the surface (cf. uniform random sampling, which under-samples low-curvature regions). For very fine geometry (sequences F, M) we additionally cap the per-frame point count at 100 K to keep playback responsive on mid-range GPUs. The choice of sampler does affect downstream JND thresholds — uniform random sampling typically yields a noisier surface and slightly lower (more sensitive) JND values; Poisson-disk gives the most stable thresholds in our pilot study. The script is parameterised, so switching sampler is a one-flag change.
 
 The output of this pipeline is then passed through PontZen before being loaded into the player.
 
