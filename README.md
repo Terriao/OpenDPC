@@ -418,7 +418,7 @@ OpenDPC has been built with three downstream applications in mind:
 
 ## Roadmap
 
-- **Cross-platform builds** — the current public release is Windows-only (uses native Win32 file dialogs and folder pickers via `Win32API`/`VistaFileDialog`). The Unity codebase is portable; macOS and Linux build profiles are on the immediate roadmap, blocked only on substituting `Standalone File Browser` for the native Windows shell calls.
+- **Cross-platform builds** — the current public release is Windows-only). The Unity codebase is portable; macOS and Linux build profiles are on the immediate roadmap, blocked only on substituting `Standalone File Browser` for the native Windows shell calls.
 - **PontZen cross-platform** — porting the preprocessor to macOS / Linux follows the player port; the core normalisation + bit-packing logic is itself portable.
 - **Broader format support** — importers for `.pcd`, `.las`, `.e57`, and on-the-fly `.obj` conversion, removing the current input-format restriction in the PontZen stage.
 - **Temporal-artefact JND track** — paired-comparison variants that hold spatial quality constant and vary *temporal* distortions (flicker, V-PCC patch popping, seam discontinuities), so that motion-specific perceptual thresholds can be measured alongside the spatial-distortion thresholds reported here.
