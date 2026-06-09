@@ -23,13 +23,13 @@
 
 ## Why this project exists
 
-A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR, capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation harness** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
+A dynamic point cloud is a *sequence* of point clouds — one per frame — and the format has matured into a serious 3D representation for VR, autonomous-driving telemetry, volumetric telepresence, and immersive cultural-heritage capture. The visualisation tooling around it has progressed in fragments: real-time pipelines for tele-presence and social VR, capture-to-display systems for studio environments (Hofer et al., 2018), and web-based viewers tuned for industrial inspection (Mei et al., 2023). What remains underserved is a tool that pairs **interactive offline playback** with a **reproducible subjective-evaluation module** over a *published distortion ladder*, so that perceptual-quality results across labs become directly comparable.
 
 OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
 1. **A dynamic point cloud player** — frame-rate-correct, GPU-resident, interactive, looped, and built to handle full-length sequences without stuttering.
-2. **An integrated JND annotation harness** — a paired-comparison interface for locating the lowest distortion level which crosses the perceptual threshold, on a per-sequence per-subject basis.
-3. **A released subjective dataset** — a subjective quality evaluation dataset involving 60 subjects collected with the harness above.
+2. **An integrated JND annotation module** — a paired-comparison interface for locating the lowest distortion level which crosses the perceptual threshold, on a per-sequence per-subject basis.
+3. **A released subjective dataset** — subjective quality evaluation involving 60 subjects collected with the module above.
 
 ---
 
@@ -37,9 +37,9 @@ OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
 Dynamic point cloud rendering itself has been addressed in several systems. Hofer et al. (IC3D 2018) built an end-to-end pipeline focused on capture-to-display latency for studio environments. Mei et al. (ICAICA 2023) released a web-based viewer optimised for industrial inspection of static and quasi-static parts. The open-source **cwipc** library (used by VR2Gather, ACM MM 2024) provides a C++/Unity stack for capturing, compressing, transmitting, and rendering point clouds in social-VR tele-presence applications; its Unity package can also render pre-recorded sequences as a side feature of the capture pipeline.
 
-OpenDPC sits in a different design point. Rather than optimising for live capture-to-display latency or tele-presence orchestration, it targets the **offline, reproducible subjective-evaluation workflow**: a researcher loads a reference sequence and a fixed distortion ladder, runs a structured paired-comparison protocol, and exports a JND result that another lab can independently reproduce. The components OpenDPC contributes that the systems above do not bundle are: a paired-comparison JND harness with a ternary-refinement controller, an integrated published V-PCC distortion ladder, and the accompanying 60-subject subjective dataset.
+OpenDPC sits in a different design point. Rather than optimising for live capture-to-display latency or tele-presence orchestration, it targets the **offline, reproducible subjective-evaluation workflow**: a researcher loads a reference sequence and a fixed distortion ladder, runs a structured paired-comparison protocol, and exports a JND result that another lab can independently reproduce. The components OpenDPC contributes that the systems above do not bundle are: a paired-comparison JND module with a ternary-refinement controller, an integrated published V-PCC distortion ladder, and the accompanying 60-subject subjective dataset.
 
-| System | Primary purpose | Player | Built-in JND harness | Public distortion ladder | Released subjective data |
+| System | Primary purpose | Player | Built-in JND module | Public distortion ladder | Released subjective data |
 |---|---|:---:|:---:|:---:|:---:|
 | **cwipc** / VR2Gather | Live capture / social VR | ✓ | — | — | — |
 | **Hofer et al.** (IC3D 2018) | Capture-to-display pipeline | ✓ | — | — | — |
@@ -50,7 +50,7 @@ The contribution we claim is the **integrated JND annotation workflow with the r
 
 ### Relation to OpenVPC
 
-OpenDPC and our concurrent **OpenVPC** project are sister codebases with distinct scope. OpenVPC is a broad collection of objective and subjective tools for **static** point clouds. OpenDPC is purpose-built for **dynamic sequences** and contributes three artefacts that OpenVPC does not: (i) a Unity real-time player for point cloud sequences, (ii) a paired-comparison JND harness adapted to the *temporal* nature of dynamic content — with the dwell-time clock, camera-locked synchronisation, and frame-rate control that are meaningless for static models — and (iii) a published 60-subject JND dataset over the V-PCC 20-rate ladder for 18 dynamic sequences. The JND interface concept overlaps; the experimental protocol, the released dataset, and the player do not.
+OpenDPC and our concurrent **OpenVPC** project are sister codebases with distinct scope. OpenVPC is a broad collection of objective and subjective tools for **static** point clouds. OpenDPC is purpose-built for **dynamic sequences** and contributes three artefacts that OpenVPC does not: (i) a Unity real-time player for point cloud sequences, (ii) a paired-comparison JND module adapted to the *temporal* nature of dynamic content — with the dwell-time clock, camera-locked synchronisation, and frame-rate control that are meaningless for static models — and (iii) a published 60-subject JND dataset over the V-PCC 20-rate ladder for 18 dynamic sequences. The JND interface concept overlaps; the experimental protocol, the released dataset, and the player do not.
 
 ---
 
@@ -166,7 +166,7 @@ OpenDPC/
 
 ### Prerequisites
 
-A 64-bit **Windows** machine with a discrete GPU. For the JND module specifically, available VRAM must be large enough to hold **both** sequences (reference and one candidate distortion) at once — the harness loads them simultaneously to keep paired-comparison latency below the rendering interval. A starting point: ≥ 4 GB VRAM for sequences denser than 10⁶ points per frame; more for higher-density content. The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
+A 64-bit **Windows** machine with a discrete GPU. For the JND module specifically, available VRAM must be large enough to hold **both** sequences (reference and one candidate distortion) at once — the module loads them simultaneously to keep paired-comparison latency below the rendering interval. A starting point: ≥ 4 GB VRAM for sequences denser than 10⁶ points per frame; more for higher-density content. The current public release is Windows-only — macOS and Linux builds are on the [roadmap](#roadmap).
 
 ### Install and run
 
@@ -273,7 +273,7 @@ The viewer shows the pristine sequence on the left and the candidate distorted s
 
 ### Search mode
 
-The Settings Panel offers a **Search Mode** selector that determines how the harness walks the rate-point ladder:
+The Settings Panel offers a **Search Mode** selector that determines how the module walks the rate-point ladder:
 
 - **Dichotomizing** *(default)* — the ternary-refinement controller described below. ~4–5 paired comparisons per sequence; the right choice for most subjective studies.
 - **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the full JND distribution (not just the threshold) is of interest.
@@ -303,7 +303,7 @@ Internally, the controller maintains a binary-tree representation of the visited
 
 ### Outputs
 
-After a JND session finishes, the harness writes two artefacts:
+After a JND session finishes, the module writes two artefacts:
 
 - **Result file** — a per-subject record of the converged JND rate point for every sequence in the run, written through a native Windows save-file dialog (`ResultSaver`). The path and format are user-selectable.
 - **Session log** — a rolling text log under `<install>/Logs/`, capped at the most recent N files (`FileLogger`). Useful for re-tracing a subject's verdict sequence or diagnosing UI / asset-loading issues after the fact.
@@ -439,7 +439,7 @@ The repository is permissively licensed for both research and commercial extensi
 ## FAQ
 
 **How does OpenDPC differ from cwipc / VR2Gather, Hofer 2018, or web-based viewers?**
-Those systems are optimised for *live capture-to-display* (Hofer 2018), *social-VR tele-presence* (cwipc / VR2Gather), or *web-based viewing* of mostly static or quasi-static parts (Mei 2023). OpenDPC is optimised for the **offline, reproducible subjective-evaluation workflow** — loading a reference and a fixed distortion ladder, running a structured paired-comparison protocol, and exporting JND results that another lab can independently reproduce. The unique pieces are the integrated JND harness, the released V-PCC distortion ladder, and the 60-subject dataset.
+Those systems are optimised for *live capture-to-display* (Hofer 2018), *social-VR tele-presence* (cwipc / VR2Gather), or *web-based viewing* of mostly static or quasi-static parts (Mei 2023). OpenDPC is optimised for the **offline, reproducible subjective-evaluation workflow** — loading a reference and a fixed distortion ladder, running a structured paired-comparison protocol, and exporting JND results that another lab can independently reproduce. The unique pieces are the integrated JND module, the released V-PCC distortion ladder, and the 60-subject dataset.
 
 **Why a separate PontZen tool rather than preprocessing inside the player?**
 The preprocessing step is single-pass, deterministic, and dataset-wide. Bundling it into the player would force a re-pack every time the user opens a sequence; keeping it standalone lets the same packed output be reused across many sessions and studies. Splitting it out also keeps the future cross-platform port simpler — the renderer and the preprocessor can be ported independently.
@@ -451,7 +451,7 @@ Unity gave us a working cross-platform shader pipeline on day one, an interactio
 About 12–15 minutes for the nine sequences in one group, under the default Dichotomizing search mode. Each sequence converges in 4–5 paired comparisons, plus the mandatory 6 s dwell time per comparison. Linear mode roughly quadruples the duration.
 
 **Can I plug in my own distortion ladder?**
-Yes. The JND harness only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the harness — preprocess them through PontZen and they load like any other sequence.
+Yes. The JND module only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the module — preprocess them through PontZen and they load like any other sequence.
 
 **Why does the JND module need so much VRAM?**
 The paired-comparison view holds both the reference and the candidate distorted sequence in VRAM simultaneously, so playback never stalls on disk I/O. As a rule of thumb, free VRAM should exceed the combined packed size of the two sequences being compared.
