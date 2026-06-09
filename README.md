@@ -493,10 +493,8 @@ We welcome:
 - New test sequences (please bring their Sketchfab / source licence)
 - Distortion-ladder generators for codecs other than V-PCC
 - Cross-platform builds (macOS, Linux) and the file-dialog refactor that unblocks them
-- Importers for additional point cloud formats (`.pcd`, `.las`, `.e57`)
-- Temporal-artefact JND protocols
-- Translations of the in-app strings (currently English-only)
-- Bug reports, especially around long sequences, large attributes, and edge cases in the Dichotomizing controller
+- Importers for additional point cloud formats (`.pcd`, `.las`, etc.)
+- Bug reports, especially around long sequences, large attributes, and edge cases
 
 Open an issue first for non-trivial contributions so we can align on interfaces. Pull requests are merged after review.
 
