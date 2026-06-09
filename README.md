@@ -89,7 +89,7 @@ The player and JND sub-platform live inside a single Unity application; the user
 <table><tr><td>
 <pre>
 ┌──────────────────────────────────────────────────────────────────────┐
-│             Raw dynamic point cloud sequences (per-frame)            │
+│                  Raw dynamic point cloud sequences                   │
 └─────────────────────────────────┬────────────────────────────────────┘
                                   │
                   ┌───────────────▼───────────────┐
