@@ -367,7 +367,6 @@ Outlier verdicts were trimmed under the **ITU-R BT.500-13** screening rule befor
 
 ### Per-subject JND results, group 1 (sequences A–I, subjects 1–30)
 
-> **Read this table as:** "For sequence A, subject 1 found the distortion first noticeable at rate point r20; subject 2 at r16; …". Lower numbers mean tighter perceptual thresholds.
 
 | Seq | s1 | s2 | s3 | s4 | s5 | s6 | s7 | s8 | s9 | s10 | s11 | s12 | s13 | s14 | s15 | s16 | s17 | s18 | s19 | s20 | s21 | s22 | s23 | s24 | s25 | s26 | s27 | s28 | s29 | s30 | **Mean** | **Std** |
 |:---:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
