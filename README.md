@@ -28,10 +28,8 @@ A dynamic point cloud is a *sequence* of point clouds — one per frame — and 
 OpenDPC targets exactly this gap. It is a Unity-based application that combines:
 
 1. **A dynamic point cloud player** — frame-rate-correct, GPU-resident, interactive, looped, and built to handle full-length sequences without stuttering.
-2. **An integrated JND annotation harness** — a paired-comparison interface for locating the lowest V-PCC rate point at which distortion crosses the perceptual threshold, on a per-sequence per-subject basis, over a published 20-point V-PCC ladder.
-3. **A released subjective dataset** — 60 subjects × 18 sequences × 20 rate points, all collected with the harness above.
-
-> *"Dynamic point clouds need playback infrastructure that is as boring and as reliable as a video player — and a perceptual-evaluation layer that does not get rebuilt every time a paper is written. OpenDPC tries to be both."*
+2. **An integrated JND annotation harness** — a paired-comparison interface for locating the lowest distortion level which crosses the perceptual threshold, on a per-sequence per-subject basis.
+3. **A released subjective dataset** — a subjective quality evaluation dataset involving 60 subjects collected with the harness above.
 
 ---
 
