@@ -130,7 +130,7 @@ OpenDPC/
 │   └── software_v2.0.rar    # archive containing JNDModelStreamViewer.exe + Unity Data
 ├── preprocess_tool/         # standalone preprocessing executable
 │   └── PontZen_v3.exe       # centring, unit-sphere scaling, 32-bit attribute packing
-├── ctc_configs/             # V-PCC rate-point configurations (the 20-point distortion ladder)
+├── ctc_configs/             # V-PCC rate-point configurations (the 20-level distortion ladder)
 │   ├── ctc-r01.cfg          # rate point r1   (Lossless)
 │   ├── ctc-r02.cfg          # rate point r2   (Near-lossless)
 │   │   …
