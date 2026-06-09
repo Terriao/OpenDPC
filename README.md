@@ -126,6 +126,9 @@ The player and JND sub-platform live inside a single Unity application; the user
 
 ```
 OpenDPC/
+├── .github                  # provide ISSUE_TEMPLATE and PULL_REQUEST templates
+│   └── ISSUE_TEMPLATE/      # contain bug_report.yml, config.yml, feature_request.yml, and question.yml
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── Software/                # prebuilt Windows binary
 │   └── software_v2.0.rar    # archive containing JNDModelStreamViewer.exe + Unity Data
 ├── preprocess_tool/         # standalone preprocessing executable
