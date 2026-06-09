@@ -77,7 +77,7 @@ OpenDPC sits in a different design point. Rather than optimising for live captur
 |---|---|---|
 | 1 | **Dynamic point cloud processor (PontZen)** | A standalone preprocessing tool that normalises geometry and bit-packs RGB-plus-luminance into a single 32-bit integer per point, ready for the GPU. |
 | 2 | **Dynamic point cloud player** | Real-time looping playback of point cloud sequences with pause / resume, frame counter, configurable FPS, free rotation, and free zoom. |
-| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a Dichotomizing-or-Linear search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
+| 3 | **JND annotation sub-platform** | A side-by-side reference-versus-distorted viewer with synchronised camera and a dichotomizing search controller that converges on the perceptual threshold across a 20-rate distortion ladder. |
 
 The player and JND sub-platform live inside a single Unity application; the user picks **Player Mode** or **JND Mode** from a Home Panel at launch. PontZen runs separately, ahead of either mode.
 
