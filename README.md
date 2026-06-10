@@ -14,10 +14,10 @@
 </div>
 
 > **Resources at a glance:**  
-> 📦 **Prebuilt software** → <https://github.com/Terriao/OpenDPC/tree/main/Software>  
-> 🧩 **Preprocessing tool** → <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>  
-> 🎚 **Distortion ladder configs** → <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>  
-> 🧪 **Test sequences** → <https://github.com/Terriao/OpenDPC/tree/main/test_data>
+> **Prebuilt software** → <https://github.com/Terriao/OpenDPC/tree/main/Software>  
+> **Preprocessing tool** → <https://github.com/Terriao/OpenDPC/tree/main/preprocess_tool>  
+> **Distortion ladder configs** → <https://github.com/Terriao/OpenDPC/tree/main/ctc_configs>  
+> **Test sequences** → <https://github.com/Terriao/OpenDPC/tree/main/test_data>
 
 ---
 
