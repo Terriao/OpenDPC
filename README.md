@@ -298,7 +298,7 @@ After a JND session finishes, the module writes two artefacts:
 
 ## Test sequences and V-PCC quality tiers
 
-The [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data) folder contains eighteen dynamic models sourced from Sketchfab, covering objects, characters, and animals (see thumbnails below). For each model, the first 64 frames are encoded by **V-PCC** at the twenty rate points defined in [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs), spanning nine quality tiers — from lossless down to very-low-quality. Five of the twenty rate points align with the **MPEG V-PCC Common Test Conditions** (CTC R1 through R5).
+The test data contains eighteen dynamic models sourced from Sketchfab, covering objects, characters, and animals (see thumbnails below). For each model, the first 64 frames are encoded by **V-PCC** at the twenty rate points defined in [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs), spanning nine quality tiers — from lossless down to very-low-quality. Five of the twenty rate points align with the **MPEG V-PCC Common Test Conditions** (CTC R1 through R5).
 
 <p align="center"><img src="samples.png" alt="18 test sequences" width="640"/></p>
 
