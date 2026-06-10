@@ -254,8 +254,8 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 | **Viewing seconds** | 6 s | Minimum time the subject must observe each comparison before the verdict buttons unlock. Prevents reflex clicks and gives temporal masking time to settle. |
 | **FPS** | 15 fps | Playback rate during evaluation. Lower than typical real-time playback to keep per-frame attention high. |
 | **Model scale** | 3× | Apparent size of the model. Held constant so that retinal projection is comparable across subjects and sessions. |
-| **Reference folder** | — | The pristine (PontZen-preprocessed) reference sequence. |
-| **Distortion ladder folder** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
+| **File directory** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
+| **Result** | — | The path to save the subject's JND results. |
 | **Search Mode** | Binary search | Selects the controller that walks the rate points (see [below](#search-mode)). |
 
 ### The viewer
