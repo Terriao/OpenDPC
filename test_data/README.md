@@ -1,6 +1,6 @@
 # OpenDPC — Test Data
 
-This folder is the entry point for the **18 dynamic point cloud sequences** used in the OpenDPC subjective experiment, together with their corresponding V-PCC distortion ladders (20 rate points each, encoded with the configurations in [`ctc_configs/`](../ctc_configs)).
+This folder is the entry point for the dynamic point cloud sequences used in the OpenDPC subjective experiment, together with their corresponding V-PCC distortion ladders (20 rate points each, encoded with the configurations in [`ctc_configs/`](../ctc_configs)).
 
 The total payload is large (~tens of GB across reference + 20 rate points × 18 sequences), so the per-frame `.ply` data is **hosted on Google Drive** rather than committed to the Git history. This README documents what the dataset contains, how to download it, and how to point the [`Software/`](../Software) viewer at it.
 
