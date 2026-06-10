@@ -262,7 +262,7 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 
 <p align="center"><img src="jnd.png" alt="JND paired-comparison view" width="640"/></p>
 
-The viewer shows the pristine sequence on the left and the candidate distorted sequence on the right. Crucially, **the two cameras are locked**: any rotation or zoom applied to one side is mirrored on the other, so the subject is never comparing apples and oranges at different angles. Two verdict buttons sit between the panels: `Similar` and `Different`.
+The viewer shows the pristine sequence on the left and the candidate distorted sequence on the right. Crucially, **the two cameras are lined**: any rotation or zoom applied to one side is mirrored on the other, so the subject is never comparing apples and oranges at different angles. Two verdict buttons sit between the panels: `Similar` and `Different`.
 
 ### Search mode
 
