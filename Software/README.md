@@ -56,7 +56,7 @@ software_v2.0/
 A single-pane dynamic point cloud viewer.
 
 - **Inputs.** One folder of per-frame `.ply` files, lexicographically ordered (`0001.ply` … `NNNN.ply`).
-- **Controls.** `Space` — pause / resume · left-drag — rotate model · scroll wheel — zoom · *Settings* tab — live FPS change.
+- **Controls.** button — pause / resume · left-drag — rotate model · scroll wheel — zoom · *Settings* tab — live FPS change.
 - **Use case.** Visual inspection, demos, screencasts, sanity-checking a sequence before submitting it to JND.
 
 ### JND Mode
