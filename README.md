@@ -264,13 +264,6 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 
 The viewer shows the pristine sequence on the left and the candidate distorted sequence on the right. Crucially, **the two cameras are linked**: any rotation or zoom applied to one side is mirrored on the other, so the subject is never comparing apples and oranges at different angles. Two verdict buttons sit between the panels: `Similar` and `Different`.
 
-### Search mode
-
-The Settings Panel offers a **Search Mode** selector that determines how the module walks the rate-point ladder:
-
-- **Dichotomizing** *(default)* — the ternary-refinement controller described below. ~4–5 paired comparisons per sequence; the right choice for most subjective studies.
-- **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the full JND distribution (not just the threshold) is of interest.
-
 ### The ternary-search controller
 
 > **Terminology note.** The "interval" walked by the controller is a **rate-point interval** along the V-PCC distortion ladder — *not* a temporal interval within the sequence. Every comparison shows the **full sequence** from start to end; the controller only changes *which rate point* on the ladder gets paired against the reference.
