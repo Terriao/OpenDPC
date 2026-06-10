@@ -40,7 +40,6 @@ Thank you for contributing to OpenDPC. Please complete the relevant sections so 
      scale, search mode), and expected outputs. -->
 
 - Test sequence used: ___________________
-- JND search mode tested: [ ] Dichotomizing  [ ] Linear
 - Repro steps:
   1. ___________________
   2. ___________________
