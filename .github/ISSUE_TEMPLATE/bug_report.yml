@@ -56,9 +56,8 @@ body:
       placeholder: |
         1. Extract software_v2.0.rar, double-click JNDModelStreamViewer.exe.
         2. Home Panel → JND Mode.
-        3. Set Reference Folder = test_data/actor/reference, Distortion Folder = test_data/actor/ladder.
-        4. Viewing seconds = 6, FPS = 15, Scale = 3, Search Mode = Dichotomizing.
-        5. Click Start. The viewer freezes after trial 3.
+        3. Viewing seconds = 6, FPS = 15, Scale = 3, Search Mode = Dichotomizing.
+        4. Click Start. The viewer freezes after trial 3.
       render: bash
     validations:
       required: true
@@ -82,9 +81,8 @@ body:
       label: Sequence and JND configuration
       description: Which sequence (reference + distortion ladder) was loaded, and what config values were used?
       placeholder: |
-        - Reference sequence: test_data/actor (~10^5 points/frame, 64 frames)
+        - Reference sequence: test_data/xxx (~10^5 points/frame, 64 frames)
         - Distortion ladder: 20 rate points r1-r20
-        - Search mode: Dichotomizing
         - Viewing seconds: 6, FPS: 15, Scale: 3
 
   - type: textarea
@@ -101,7 +99,7 @@ body:
       options:
         - label: I have searched the existing issues and confirmed this is not a duplicate.
           required: true
-        - label: I have read the relevant section of the README and the FAQ.
+        - label: I have read the relevant section of the README.
           required: true
         - label: I have checked that available VRAM exceeds the combined size of the two sequences being compared.
           required: false
