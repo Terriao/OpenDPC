@@ -65,8 +65,8 @@ A paired-comparison annotation harness driven by a search controller over the V-
 
 - **Inputs.** A distortion-ladder parent folder (the harness auto-discovers `r01/` … `r20/` subfolders).
 - **Configurable parameters.** Viewing seconds (default 6 s), FPS (default 15), model scale (default 3×), search mode.
-- **Search modes.**  ternary-refinement controller on the rate-point ladder; converges in 4–5 paired comparisons per sequence.  
-- **Outputs.** A *result file* (per-subject JND rate point per sequence) and a *session log* under `<install>/Logs/`.
+- **Search modes.**  Ternary-refinement controller on the rate-point ladder; converges in 4–5 paired comparisons per sequence.  
+- **Outputs.** A *result file* (per-subject JND rate point per sequence) and a *session log*.
 
 ---
 
