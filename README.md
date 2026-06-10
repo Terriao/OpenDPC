@@ -230,7 +230,7 @@ Interactive controls during playback:
 <div align="center">
 <table>
 <tr><th>Action</th><th>Input</th></tr>
-<tr><td>Pause / resume</td><td><code>Space</code> or the play/pause icon</td></tr>
+<tr><td>Pause / resume</td><td>play/pause icon</td></tr>
 <tr><td>Rotate model</td><td>Left-drag</td></tr>
 <tr><td>Zoom</td><td>Scroll wheel</td></tr>
 <tr><td>Change FPS</td><td>Settings panel (live)</td></tr>
