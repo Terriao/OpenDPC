@@ -26,39 +26,6 @@ After download, place (or symlink) the extracted content under this directory so
 
 ---
 
-## 🎯 How the viewer ingests this folder
-
-The pre-built binary in [`../Software/software_v2.0.rar`](../Software/software_v2.0.rar) consumes the layout above directly. Frames are first run through [`PontZen`](../preprocess_tool) before VRAM upload, but the source `.ply` files are the canonical artefact distributed here.
-
-**Player Mode** — point the *Sequence Folder* field at any single subfolder, e.g.
-
-```
-test_data/A/reference/        ← pristine playback
-test_data/A/r13/              ← distorted at CTC R3
-```
-
-**JND Mode** — supply both the reference *and* the parent ladder folder:
-
-```
-Reference Folder:           test_data/A/reference/
-Distortion Ladder Folder:   test_data/A/                ← the harness picks r01 .. r20 automatically
-```
-
-The harness expects all twenty `r01/` … `r20/` subfolders to share the same frame count and indexing as `reference/`; missing frames or mismatched lengths will surface in the session log under `<install>/Logs/`.
-
----
-
-## 🧪 Sequence catalogue
-
-| Group | IDs | Sketchfab category | Frames | Used in |
-|:---:|:---|:---|:---:|:---|
-| 1 | A – I | objects, characters, animals | 64 | Subjects 1–30, Group 1 JND table |
-| 2 | J – R | objects, characters, animals | 64 | Subjects 31–60, Group 2 JND table |
-
-Thumbnails of all 18 sequences are shown in the main README under *Test sequences and V-PCC quality tiers*.
-
----
-
 ## ⚖️ Licensing and redistribution
 
 The source `.glb` models were obtained from [Sketchfab](https://sketchfab.com/) under their respective individual licences, which are **not collectively re-distributable** under MIT. We therefore release:
