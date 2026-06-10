@@ -256,7 +256,7 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 | **Model scale** | 3× | Apparent size of the model. Held constant so that retinal projection is comparable across subjects and sessions. |
 | **Reference folder** | — | The pristine (PontZen-preprocessed) reference sequence. |
 | **Distortion ladder folder** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
-| **Search Mode** | Dichotomizing | Selects the controller that walks the rate points (see [below](#search-mode)). |
+| **Search Mode** | Binary search | Selects the controller that walks the rate points (see [below](#search-mode)). |
 
 ### The viewer
 
