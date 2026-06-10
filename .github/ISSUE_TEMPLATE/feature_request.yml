@@ -42,9 +42,7 @@ body:
       label: Why is this needed?
       description: What is the use case? What problem does it solve?
       placeholder: |
-        Currently OpenDPC can only accept .ply sequences. We capture our point clouds with a depth-camera
-        rig that writes .pcd directly, and converting to .ply for every session is a several-minute
-        bottleneck.
+        
     validations:
       required: true
 
