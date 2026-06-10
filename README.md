@@ -291,7 +291,7 @@ Internally, the controller maintains a binary-tree representation of the visited
 
 After a JND session finishes, the module writes two artefacts:
 
-- **Result file** — a per-subject record of the converged JND rate point for every sequence in the run, written through a native Windows save-file dialog (`ResultSaver`). The path and format are user-selectable.
+- **Result file** — a per-subject record of the converged JND rate point for every sequence in the run, written through a native Windows save-file dialog.  
 - **Session log** — a rolling text log under `<install>/Logs/`, capped at the most recent N files (`FileLogger`). Useful for re-tracing a subject's verdict sequence or diagnosing UI / asset-loading issues after the fact.
 
 ---
