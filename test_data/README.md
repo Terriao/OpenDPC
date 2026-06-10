@@ -41,7 +41,7 @@ The source `.glb` models were obtained from [Sketchfab](https://sketchfab.com/) 
 For reproducibility, every sequence under this folder was produced as follows:
 
 ```
-.glb (Sketchfab)  ──Blender──►  .obj + textures  ──CloudCompare (Poisson-disk)──►  .ply sequence
+.glb (Sketchfab)  ──Blender──►  .obj + textures  ──  CloudCompare  ──►  .ply sequence
                                                               │
                                                               ▼
                                               V-PCC reference encoder ×20
@@ -50,9 +50,7 @@ For reproducibility, every sequence under this folder was produced as follows:
                                                  r01.ply … r20.ply  (64 frames each)
 ```
 
-CloudCompare's **Poisson-disk surface sampling** is used to yield a roughly uniform point density across the surface; the two densest models (sequences F and M) are additionally capped at 10⁵ points per frame to keep playback responsive on mid-range GPUs. Encoder configuration files for the 20 rate points are in [`../ctc_configs/`](../ctc_configs).
 
----
 
 ## 📚 Citation
 
