@@ -33,7 +33,6 @@ The source `.glb` models were obtained from [Sketchfab](https://sketchfab.com/) 
 - The conversion scripts and the encoded V-PCC ladders generated from them — under the project's MIT licence;
 - The raw frames on Google Drive — under the **same licence as the upstream Sketchfab model**, which the downstream user is responsible for checking before any redistribution.
 
-If you are a Sketchfab model author and find a sequence in this set that you would prefer we remove, please open an issue or email `gaowei262@pku.edu.cn`; we will take it down promptly.
 
 ---
 
