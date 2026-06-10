@@ -255,8 +255,8 @@ The configuration screen exposes the parameters that previous JND-on-video studi
 | **FPS** | 15 fps | Playback rate during evaluation. Lower than typical real-time playback to keep per-frame attention high. |
 | **Model scale** | 3× | Apparent size of the model. Held constant so that retinal projection is comparable across subjects and sessions. |
 | **File directory** | — | A parent folder of subfolders, one per rate point, sorted by ascending distortion. |
-| **Result** | — | The path to save the subject's JND results. |
-| **Search Mode** | Binary search | Selects the controller that walks the rate points (see [below](#search-mode)). |
+| **Result file** | — | The path to save the subject's JND results. |
+| **Search mode** | Binary search | Selects the controller that walks the rate points (see [below](#search-mode)). |
 
 ### The viewer
 
