@@ -182,10 +182,6 @@ The player expects sequences in a GPU-ready packed format produced by **PontZen*
 4. Point the player (or the JND module's reference / distortion-ladder fields) at the *output* folder.
 
 
-### Try it on the bundled test data
-
-The repository's [`test_data/`](https://github.com/Terriao/OpenDPC/tree/main/test_data) folder ships the 18 reference sequences used in our subjective experiments. For Player Mode, point at any `test_data/<sequence>/reference/` folder. For JND Mode, point at `test_data/<sequence>/` (which contains both the reference and the per-rate-point subfolders). The 20 V-PCC encoder configurations that generated the distortion ladder live in [`ctc_configs/`](https://github.com/Terriao/OpenDPC/tree/main/ctc_configs).
-
 ### Choose a mode
 
 At launch the **Home Panel** presents two entry points:
