@@ -271,7 +271,7 @@ The Settings Panel offers a **Search Mode** selector that determines how the mod
 - **Dichotomizing** *(default)* — the ternary-refinement controller described below. ~4–5 paired comparisons per sequence; the right choice for most subjective studies.
 - **Linear** — exhaustively walks every rate point from r1 to r20 in order, one comparison each. ~20 comparisons per sequence; reserved for **ground-truth calibration**, for validating the Dichotomizing controller against a full-scan reference, or for studies where the full JND distribution (not just the threshold) is of interest.
 
-### The ternary-search controller (Dichotomizing mode)
+### The ternary-search controller
 
 > **Terminology note.** The "interval" walked by the controller is a **rate-point interval** along the V-PCC distortion ladder — *not* a temporal interval within the sequence. Every comparison shows the **full sequence** from start to end; the controller only changes *which rate point* on the ladder gets paired against the reference.
 
@@ -437,7 +437,7 @@ The preprocessing step is single-pass, deterministic, and dataset-wide. Bundling
 Unity gave us a working cross-platform shader pipeline on day one, an interaction layer (drag, zoom, UI panels) that did not need to be hand-rolled, and a build system that targets Windows, macOS, and Linux from the same source tree. The cost is a heavier runtime; the saving is months of engineering. For a research-grade tool, the trade lands in Unity's favour.
 
 **How long does one JND annotation session take per subject?**
-About 12–15 minutes for the nine sequences in one group, under the default Dichotomizing search mode. Each sequence converges in 4–5 paired comparisons, plus the mandatory 6 s dwell time per comparison. Linear mode roughly quadruples the duration.
+About 12–15 minutes for the nine sequences in one group, under the default ternary search mode. Each sequence converges in 4–5 paired comparisons, plus the mandatory 6 s dwell time per comparison. Linear mode roughly quadruples the duration.
 
 **Can I plug in my own distortion ladder?**
 Yes. The JND module only needs an ordered set of subfolders, one per rate point, with the same frame count and indexing as the reference. Whether the distortions come from V-PCC, G-PCC, a learned codec, or hand-injected noise is opaque to the module — preprocess them through PontZen and they load like any other sequence.
