@@ -207,10 +207,6 @@ At launch the **Home Panel** presents two entry points:
 
 The packed output is what the player ingests. Without preprocessing, raw frames work for the very smallest sequences but break the GPU-streaming guarantees on anything realistic.
 
-### Why a separate tool?
-
-We split PontZen out of the player on purpose. The preprocessing step is single-pass, deterministic, and dataset-wide; bundling it inside the player would force a re-pack every time the user opens a sequence. Keeping it standalone lets a sequence be preprocessed once, then reused across many sessions, many studies, and (eventually) cross-platform builds of the player without re-running the conversion.
-
 ---
 
 ## The player in detail
